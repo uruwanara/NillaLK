@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link rel="stylesheet" type="text/css" href="../css/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/img.css">
+	    <link rel="stylesheet" type="text/css" href="../css/button.css">
+	    <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+	    <link rel="stylesheet" type="text/css" href="../css/font.css">
+	    <link rel="stylesheet" type="text/css" href="../css/header.css">
+	    <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+	    <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+	    <link rel="stylesheet" type="text/css" href="../css/content.css">
+        <link rel="stylesheet" type="text/css" href="../css/file-upload.css">
+		<title>Shop Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('ShopOwner');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+		<script>
+			const query = window.location.search;
+			const urlParameter = new URLSearchParams(query);
+			const shopID = urlParameter.get('shopID');
+		</script>			    
+	</head>
+	<body>
+		<!-- Header of Page -->
+		<div class="header" id="header">
+	       	<div class="row">
+	           	<div class="content-line">
+	               	<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+	               	<img src="../img/logo_green.png" class="logo-header">
+	               	<h3 class="header-title">Request New Item</h3>
+	           	</div>
+				<div class="content-header content-line">
+				
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-UserName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>
+				</div>  
+			</div>
+		</div>
+		
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>          
+		    <a href="shop_updateProduct.html">Update Products</a>
+		    <a href="shop_addNewProduct.html">Add New Products</a>
+		    <a href="shop_reqNewItem.html">New Item Requests</a>
+		    <a href="shop_reqPrioritize.html">Priorities Requests</a>
+			<a href="shopAddNewShop.html">Add New Shop</a>
+		</div>
+
+		<div id="content">
+			<!-- Start of Window content without header and footer -->
+			<div class="center">
+				<div class="col-12"><div class="header-height"></div></div>
+				<div>
+					<form id="createNewProductReq">
+						<div class="col-12">
+							<div class="col-3">
+								<label class="labelData">Select the Product Type</label>
+							</div>
+							<div class="col-3">
+								<select id="productType" name="productType">
+									<option value="plant">Plant</option>
+									<option value="seed">Seed</option>
+									<option value="accessories">Accessories</option>
+									<option value="fertilizer">Fertilizer</option>
+									<option value="other">Other</option>
+								</select>
+							</div>
+							<div class="col-2"></div>
+							<div class="col-2">
+								<label class="labelData">Product Image</label>
+							</div>
+							<div class="col-2">
+								<button id="button-upload" class="button-rounded chat-upload flex col-12" style="font-size: medium; font-weight: bold;">Upload Article Image</button>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="col-3" style="padding-top: 15px;">
+								<label class="labelData">New Product Name</label>
+							</div>
+							<div class="col-9">
+								<input class="col-12 textData" name="productName" id="productName" type="text" style="font-size: large; font-weight: bold;" required>
+							</div>
+							<div class="col-3" style="padding-top: 15px;">
+								<label class="labelData">New Product Description</label>
+							</div>
+							<div class="col-9">
+								<input class="col-12 textData" name="productDes" id="productDes" type="text" style="font-size: large; font-weight: bold;">
+							</div>
+						</div>
+						<div style="text-align: right;">
+							<input class="btn btn-s" type="submit">
+							<button class="btn btn-s" onclick="closeReqNewItem(shopID)">Cancel</button>    
+						</div>
+					</form>
+					
+					<script type="text/javascript">
+						function creatingRequestSuccess(data) {
+							window.open("dashboard.html", "_self");
+						}
+							
+						function creatingRequestFailed(data) {
+							/* TODO: Show error*/
+							var alert = document.getElementById('divalert');
+							alert.style.visibility = 'visible';
+							alert.innerHTML = data['reason'];
+						}
+						
+						$("#createNewProductReq").submit(function(e) {
+								
+							console.log("creating request...");
+							e.preventDefault();
+			
+							// TODO check before submiting
+							var productType = $('#productType').val();
+							var productName = $('#productName').val();
+							var productDes = $('#productDes').val();
+							var productImg = localStorage.getItem("Image");
+							
+							item = {};
+							item['requestType'] = "NewProduct";
+							item['requestState'] = "InReview";
+							item['newProductType'] = productType;
+							item['newProductName'] = productName;
+							item['newProductDes'] = productDes;
+							item['newProductImg'] = productImg;
+							item['shopID'] = shopID;
+							jsonString = JSON.stringify(item);
+							
+							postAPI("api/requests", {}, jsonString, creatingRequestSuccess, creatingRequestFailed);
+						});
+					</script>	
+				</div>
+
+                <!--Image Upload -->
+                <div class="popup-1" id="uploadImage">
+                    <div class="col-12" style="text-align: right">
+                        <input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closeUploadImg()">
+                    </div>
+                    <div class="col-12 center" style="text-align: center;">
+                        <h2>Upload Your Article Image Here.....</h2>
+                        <form id="addImage">
+							<input type="file" value="Upload Image" id="imageUpload" name="imageUpload" required>
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-s" style="margin-bottom: 10px;" value="Change">
+                            </div>
+                        </form>
+
+                        <script>
+                            function uploadingImgSuccess(data) {
+                            	console.log(data);
+//                                window.open("admin_blog.html", "_self");
+                            }
+                                
+                            function uploadingImgFailed(data) {
+                                /* TODO: Show error*/
+                                var alert = document.getElementById('divalert');
+                                alert.style.visibility = 'visible';
+                                alert.innerHTML = data['reason'];
+                            }
+                            
+                            $("#addImage").submit(function(e) {  
+                            	console.log("uploading Image...");
+                            	e.preventDefault();
+
+                            	let image = $('imageUpload').val();   
+                            	                         
+                            	postAPI("upload", {scope: 'Public', type: ""}, image, uploadingImgSuccess, uploadingImgFailed);                                
+                            });	
+                        </script>
+                    </div>
+                </div>
+
+				<script>
+					$('#button-upload').click(function() {
+						$('#f-upload-window').show();
+					});
+	
+					$('body').loadTemplate('../templates/file-upload.html', {type: 'Other', scope: 'Public'}, {append: true, success: function() {
+						$("#upload-form").submit(function(e) {
+						    e.preventDefault();
+							
+							console.log('uploading...')
+							
+							uploadAPI(new FormData(e.target), function(data) {
+								//on success
+								console.log(data.path);
+								localStorage.setItem("Image", data.path);
+								closeUploadWindow();
+							}, function(error) {
+								console.error(error);
+								//on failure
+							});
+						});
+					}});				
+				</script>
+
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div>
+
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+        <script type="text/javascript" src="../js/logout.js"></script>
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_shop.js"></script>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+cloud_sql_proxy -instances=nillalk:asia-southeast1:nilla-lk-sql=tcp:3306

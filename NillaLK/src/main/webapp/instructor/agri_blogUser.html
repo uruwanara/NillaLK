@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <title>Agriculture Instructor Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('AgriInstructor');
+			
+			//must have in every page
+			$(window).on('load', function() {
+				document.body.style.display = "block";
+			});
+		</script>
+	
+    </head>
+    <body>
+		<!-- Header of Home Page -->
+		<div class="header" id="header">
+			<div class="row">
+				<div class="content-line">
+					<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">  
+				  	<img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Blog</h3>       
+				</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-UserName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+			</div>
+		</div>
+
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>
+			<a href="user_plant.html">View Plant Details</a>
+			<a href="user_shop.html">View Nearby Shops</a>
+			<a href="user_agri.html">Contact Agricultural Instructor</a>
+			<a href="user_blog.html">Blog</a>
+			<a href="user_monitorPlant.html">Monitor Plants</a>
+		</div>
+		
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>				
+                <!--Dynamic Content 1-->
+                <div id="content-load">
+                    <!-- dynamic content load here -->
+			        <script type="text/javascript">
+			        
+			        	function success(data) {
+			        		//console.log(data);
+			        		$('#content-load').loadTemplate("../templates/blogUser-view-block.html", data, {append: true});
+			        	}
+			        	
+			        	function failed(data) {
+			        		console.log("failed");
+			        		console.log(data);
+			        	}
+			        	
+			        	getAPI("api/articles", {'userID': getUserID}, success, failed);
+			        	
+                    </script>
+                </div>
+                <div class="col-12" style="text-align: right;">
+                    <input type="button" class="btn btn-s" onclick="closeViewMyArticle()" value="Cancel">
+                </div>
+                <div class="col-12"><div class="footer-height"></div></div>
+            </div>
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+		<script type="text/javascript" src="../js/logout.js"></script>	        
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_agri.js"></script>
+    </body>
+</html>

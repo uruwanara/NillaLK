@@ -1,0 +1,300 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <title>Agriculture Instructor Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('AgriInstructor');
+			
+			//must have in every page
+			$(window).on('load', function() {
+				document.body.style.display = "block";
+			});
+		</script>
+	</head>
+	<body>
+			<!-- Header of Home Page -->
+			<div class="header" id="header">
+				<div class="row">
+					<div class="content-line">
+						<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">  
+					  	<img src="../img/logo_green.png" class="logo-header">
+					  	<h3 class="header-title">Agriculture Instructor Dashboard</h3>       
+					</div>
+					<div class="content-header content-line">
+					  	<h4 class="header-user-name"> Agriculture Instructor </h4>     
+						<!-- Drop down menu of header -->
+						<div class="dropdown">
+							<img src="../img/icon/user.png" class="img-header userdropbtn" onclick="showDropDown()">
+							<div id="userDropdown" class="user-dropdown-content">
+							    <a href="updateUserDetails.html">Manage Your Account</a><br>
+							    <a href='javascript:' onclick="logout()">Logout</a>
+							</div>
+						</div>      
+					</div>
+				</div>
+			</div>
+	
+			<!-- Side Menu of Page -->
+			<div id="userSidebar" class="sidebar">
+				<a href="dashboard.html">Dashboard</a>
+				<a href="agri_plant.html">Plant</a>
+				<a href="agri_blog.html">Blog</a>
+			</div>
+
+		<!-- Start of Window content without header and footer -->
+        <div id="content">		
+		<div class="center">
+            <div class="col-12 col-s-12 header-height" style="padding-bottom: 150px;">
+				<form id="newPlant">
+	                <div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Plant Name</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="name" placeholder="">
+	                    </div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Plant Family</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="family" placeholder="">
+	                    </div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Plant Type</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="plantType" placeholder="">
+	                    </div>
+					</div>
+					<p style="font-weight: bolder;"> Data about the plant</p>
+					<div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">pH</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="pH" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Germination Days</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="germDays" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Distance between Plants</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="disPlant" placeholder="">
+						</div>
+					</div>
+					<div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Distance between Plant Rows</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="disRow" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Depth of Pit</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="pitDepth" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Watering Days</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="waterDays" placeholder="">
+						</div>
+					</div>
+					<div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Harvest Days</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="harvestDays" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Seed bed Days</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="seedBed" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Sunlight Condition</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="sunlight" placeholder="">
+						</div>
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px; text-align: right; ">Container</p>
+	                    </div>
+	                    <div class="col-2 col-s-6">
+	                        <input class="textData " type="number" id="container" placeholder="">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Climate Conditions</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="climate" placeholder="">
+	                    </div>
+					</div>
+			
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Soil Condition</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="soil" placeholder="">
+	                    </div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Harvesting Advice</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="harvesDes" placeholder="">
+	                    </div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Watering Advice</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="waterDes" placeholder="">
+	                    </div>
+					</div>
+	
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Ground Making Description</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="makeGrnd" placeholder="">
+	                    </div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+	                        <p style="padding-top: 0px;">Image URL</p>
+	                    </div>
+	                    <div class="col-4 col-s-6">
+	                        <input class="textData " type="text" id="plantImg" placeholder="">
+	                    </div>
+					</div>
+	
+						<div style="text-align: right;">
+							<input class="btn btn-s" type="submit"> 
+						</div>
+					</form>
+			</div>
+        </div>
+				
+				<script>
+
+					function creatingPlantSuccess(data) {
+						window.open("agri_plant.html", "_self");
+//		        		var alert = document.getElementById('divalert');
+//						alert.style.visibility = 'hidden';
+//						location.href = '/login.html';
+		        	}
+		        	
+					function creatingPlantFailed(data) {
+						/* TODO: Show error*/
+						var alert = document.getElementById('divalert');
+						alert.style.visibility = 'visible';
+						alert.innerHTML = data['reason'];
+		        	}
+				
+					$("#newPlant").submit(function(e) {
+						
+						console.log("creating plant...");
+						e.preventDefault();
+	
+						// TODO check before submiting
+						var name = $('#name').val();
+		        		var family = $('#family').val();
+		        		var plantType = $('#plantType').val();
+						var pH = Number($('#pH').val());
+		        		var germDays = Number($('#germDays').val());
+		        		var disPlant = Number($('#disPlant').val());
+						var disRow = Number($('#disRow').val());
+		        		var pitDepth = Number($('#pitDepth').val());
+		        		var waterDays = Number($('#waterDays').val());
+						var harvestDays = Number($('#harvestDays').val());
+		        		var seedBed = Number($('#seedBed').val());
+		        		var sunlight = Number($('#sunlight').val());
+		        		var container = Number($('#container').val());
+		        		var climate = $('#climate').val();
+		        		var soil = $('#soil').val();
+		        		var harvestDes = $('#harvestDes').val();
+						var waterDes = $('#waterDes').val();
+		        		var makeGrnd = $('#makeGrnd').val();
+		        		var plantImg = sanitize($('#plantImg').val());
+
+						translationItem = {};
+						translationItem['language'] = "English";
+						translationItem['name'] = name;
+						translationItem['family'] = family;
+						translationItem['climate'] = climate;
+						translationItem['harvestDes'] = harvestDes;
+						translationItem['waterDes'] = waterDes;
+						translationItem['makeGrnd'] = makeGrnd;
+		        		
+		        		item = {};
+		        		item['pH'] = pH;
+		        		item['germDays'] = germDays;
+		        		item['disPlant'] = disPlant;
+		        		item['disRow'] = disRow;
+		        		item['pitDepth'] = pitDepth;
+		        		item['waterDays'] = waterDays;
+		        		item['harvestDays'] = harvestDays;
+		        		item['seedBed'] = seedBed;
+		        		item['sunlight'] = sunlight;
+		        		item['container'] = container;
+		        		item['plantType'] = "Vegetable";
+		        		item['translations'] = translationItem;
+		        		jsonString = JSON.stringify(item);
+		        		
+		        		postAPI("api/plants", {}, jsonString, creatingPlantSuccess, creatingPlantFailed);
+						
+					});
+
+				</script>
+				
+        	</div>
+ 
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		           
+        <script type="text/javascript" src="../js/logout.js"></script>		          
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_User.js"></script>
+    </body>
+</html>

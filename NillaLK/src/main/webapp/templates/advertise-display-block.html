@@ -1,0 +1,21 @@
+<script>
+	$("button").click(function(){
+		var addID = $(this).val();
+		showAdvertisement(addID);
+	});
+</script>
+
+<div class="col-12 border">
+	<div class="col-1">
+		<img src="../img/icon/user.png" width="30px" height="30px">                        
+	</div>
+	<div class="col-6" style="margin-top: 10px;">
+		<h3 data-content="addCompany"></h3>
+	</div>
+	<div class="col-3" style="margin-top: 10px;">
+		<h4 data-content="addDate"></h4>
+	</div>
+	<div class="col-2">
+		<button class="btn-mini" data-value="addID">View</button>
+	</div>
+</div>

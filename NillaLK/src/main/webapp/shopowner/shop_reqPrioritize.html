@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link rel="stylesheet" type="text/css" href="../css/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/img.css">
+	    <link rel="stylesheet" type="text/css" href="../css/button.css">
+	    <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+	    <link rel="stylesheet" type="text/css" href="../css/font.css">
+	    <link rel="stylesheet" type="text/css" href="../css/header.css">
+	    <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+	    <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+	    <link rel="stylesheet" type="text/css" href="../css/content.css">
+        <link rel="stylesheet" type="text/css" href="../css/file-upload.css">
+	    <title>Shop Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('ShopOwner');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+		<script>
+			const query = window.location.search;
+			const urlParameter = new URLSearchParams(query);
+			const shopID = urlParameter.get('shopID');
+		</script>			    
+	</head>
+	<body>
+		<!-- Header of Page -->
+		<div class="header" id="header">
+	       	<div class="row">
+	           	<div class="content-line">
+	               	<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+	               	<img src="../img/logo_green.png" class="logo-header">
+	               	<h3 class="header-title">Request New Item</h3>
+	           	</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-ShopOwnerName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+	        </div>
+		</div>
+		
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>          
+		    <a href="shop_updateProduct.html">Update Products</a>
+		    <a href="shop_addNewProduct.html">Add New Products</a>
+		    <a href="shop_reqNewItem.html">New Item Requests</a>
+		    <a href="shop_reqPrioritize.html">Priorities Requests</a>
+		</div>
+
+		<div id="content">
+			<!-- Start of Window content without header and footer -->
+			<div class="center">
+				<div class="col-12"><div class="header-height"></div></div>
+				<div>
+					<form id="createPrioritizeReq">
+						<h2 style="color: #92d034;">Instructions</h2>
+						<h4>
+							Pay the amount to the one of the following bank accounts and send us the payment slip <br>
+							Bank Account : Peoples bank : 2555122251145615
+						</h4>					
+						<div class=" row">
+							<div class="col-3 col-s-1 ">
+								<button class="btn-pReq">
+									<p>Priorities for 1 Week</p>
+									<h2>Rs.250.00 </h2>
+								</button>
+							</div>
+		
+							<div class="col-3 col-s-1">
+								<button class="btn-pReq">
+									<p>Priorities for 1 Month</p>
+									<h2>Rs.850.00 </h2>
+								</button>
+							</div>
+							<div class="col-3 col-s-1">
+								<button class="btn-pReq">
+									<p>Priorities for 3 Month</p>
+									<h2>Rs.2400.00 </h2>
+								</button>
+							</div>
+							<div class="col-3 col-s-1 ">
+								<button class="btn-pReq">
+									<p>Priorities for 6 Month</p>
+									<h2>Rs.4500.00 </h2>
+								</button>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="col-12">
+								<button id="button-upload" class="col-4 btn button-rounded chat-upload flex">Upload Payment Slip Image</button>
+							</div>
+							<div class="col-2" style="padding-top: 15px;">
+								<label class="labelData">Select Package</label>
+							</div>
+							<div class="col-10 col-s-6">
+								<select id="package" style="font-size: small;">
+									<option value="pkg1" style="font-size: small;">Priorities for 1 Week</option>
+									<option value="pkg2" style="font-size: small;">Priorities for 1 Month</option>
+									<option value="pkg3" style="font-size: small;">Priorities for 3 Month</option>
+									<option value="pkg4" style="font-size: small;">Priorities for 6 Month</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="col-2" style="padding-top: 15px;">
+								<label class="labelData">Any Comment</label>
+							</div>
+							<div class="col-10">
+								<input class="col-12 textData" type="text" style="font-size: large;" required>
+							</div>
+						</div>
+						<div class="col-12" style="text-align: right;">
+							<input class="btn btn-s" type="submit">
+							<button class="btn btn-s" onclick="closeReqNewItem(shopID)">Cancel</button>    
+						</div>				
+					</form>
+
+					<script type="text/javascript">
+						function creatingRequestSuccess(data) {
+							window.open("dashboard.html", "_self");
+						}
+							
+						function creatingRequestFailed(data) {
+							/* TODO: Show error*/
+							var alert = document.getElementById('divalert');
+							alert.style.visibility = 'visible';
+							alert.innerHTML = data['reason'];
+						}
+						
+						$("#createPrioritizeReq").submit(function(e) {
+								
+							console.log("creating request...");
+							e.preventDefault();
+			
+							// TODO check before submiting
+							var pckg = $('#package').val();
+							var paymentImage = localStorage.getItem("Image");
+							
+							item = {};
+							item['requestType'] = "Prioritize";
+							item['requestState'] = "InReview";
+							item['package'] = pckg;
+							item['paymentImage'] = paymentImage;
+							item['shopID'] = shopID;
+							jsonString = JSON.stringify(item);
+							
+							postAPI("api/requests", {}, jsonString, creatingRequestSuccess, creatingRequestFailed);
+						});
+					</script>
+				</div>
+                <!--Image Upload -->
+				<script type="text/javascript">
+					$('#button-upload').click(function() {
+						$('#f-upload-window').show();
+					});
+	
+					$('body').loadTemplate('../templates/file-upload.html', {type: 'Other', scope: 'Public'}, {append: true, success: function() {
+						$("#upload-form").submit(function(e) {
+						    e.preventDefault();
+							
+							console.log('uploading...')
+							
+							uploadAPI(new FormData(e.target), function(data) {
+								//on success
+								console.log(data.path);
+								localStorage.setItem("Image", data.path);
+								closeUploadWindow();
+							}, function(error) {
+								console.error(error);
+								//on failure
+							});
+						});
+					}});				
+				</script>
+                <div class="col-12"><div class="footer-height"></div></div>
+            </div>
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>		        
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_shop.js"></script>
+    </body>
+</html>

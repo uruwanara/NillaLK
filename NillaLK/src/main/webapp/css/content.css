@@ -1,0 +1,59 @@
+.block-cont {
+    border-radius: 15px;
+    border: 2px solid #92d034;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    height: 120px;
+}
+.block-chat-parti {
+    border-radius: 15px;
+    border: 2px solid #92d034;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    height: 65px;
+}
+.block-chat-messeges {
+    border-radius: 15px;
+    border: 2px solid #92d034;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    height: 100%;
+}
+.block-agriOfficer {
+    border-radius: 15px;
+    border: 2px solid #92d034;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    height: 65px;
+}
+
+@media only screen and (max-width: 768px) {
+    .block-s-cont {
+        border-radius: 15px;
+        border: 2px solid #92d034;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10px;
+        text-align: center;
+}

@@ -1,0 +1,30 @@
+label {
+    font-weight: bold;
+    font-size:14px;
+    margin: 50px 0px 50px 0px;
+}
+
+.input {
+	margin: 50px 0px 50px 0px;
+}
+
+input:invalid {
+  border: 2px solid red;
+}
+
+.alert {
+  padding: 10px;
+  margin: 20px 0px;
+  background-color: #f44336;
+  border-radius: 5px;
+  color: white;
+  font-size:13px;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+}
+
+.alert.warning {
+	background-color: #ff9800;
+}

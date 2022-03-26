@@ -1,0 +1,20 @@
+/* Not worrying about styling atm. */
+
+/* Gave the body a bit of automatic margin of 20% to the left */
+body {
+  margin: 0 auto;
+  width: 80%;
+}
+
+/* Used the quick and dirty way of aligning things */
+#content {
+  float: right;
+}
+
+/* Styled the input textarea to my likings */
+textarea {
+  margin-top: 3%;
+  width: 50%;
+  border-radius: 2%;
+  font-size: 0.8rem;
+}

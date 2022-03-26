@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/index.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/login.css">
+        <title>Register with Nilla.lk</title>
+        
+		<!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+    </head>
+    <body>
+        <div class="container container-s">
+            <!--Form Begin-->
+            <div class="col-6 col-s-12">
+            	<img src="../img/logo.png" class="block-img">
+            </div>
+            <div class="col-6 col-s-12">
+	            <div class="col-12" id="RegUser">
+	                <h2 id="helloMsg">Hello Gardener,</h2>
+	                <form>
+	                	<button class="btn btn-s" onclick="">Upload Your Profile Picture</button>
+		            	<h3 class="text-left">Address</h3>
+		            	<input class="textData textData-s" type="text" id="addLine1" placeholder="Address Line 1"> 
+		            	<input class="textData textData-s" type="text" id="addLine2" placeholder="Address Line 2"> 
+		            	<input class="textData textData-s" type="text" id="city" placeholder="City"> 
+		            	<input class="textData textData-s" type="text" id="district" placeholder="District">	                
+		            	<div class="col-12">
+		            		<div class="col-6">
+			            		<input class="textData textData-s" width="100%" type="text" id="contactNum" placeholder="Contact Number">
+		            		</div>
+		            		<div class="col-6 content-line">
+				            	<h4 class="text-left">Date of Birth</h4>
+				           		<input class="" type="date" id="dob" placeholder="Date of Birth"> 	            		
+		            		</div>
+		            	</div>
+					</form>
+	            	<div class="text-right">
+			        	<button class="btn btn-s" onclick="openLogin()">Register</button>    
+			            <button class="btn btn-s" onclick="clearRegForm()">Clear</button>    
+			            <button class="btn btn-s" onclick="cancelRegistration()">Cancel</button>    
+			        </div>
+	            </div>
+            </div>
+		</div>              
+        <!--Form End-->
+          
+        <!--Registration Successful Pop up-->
+        <!--div class="popup-1" id="Reg_Successful">
+          	<div class="col-12" style="text-align: right">
+               	<input type="image" src="../img/close.png" class="close-icon" onclick="closeRegSuccessful()">
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <h2>Registration Successful!</h2>
+                <img src="../img/success.png" width="40px" style="margin: 10px">
+                <h4>Please check the email for confirmation</h4>
+            </div>
+        </div-->
+            
+        <!--Registration Unsuccessful Pop up-->
+        <!-- div class="popup-1" id="Reg_Unsuccessful">
+           	<div class="col-12" style="text-align: right">
+               	<input type="image" src="../img/close.png" class="close-icon" onclick="closeRegUnsuccessful()">
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <h2>Registration Unsuccessful</h2>
+                <img src="../img/unsuccess.png" width="40px" style="margin: 10px">
+                <h4>Please check the entered email and other details</h4>
+            </div>
+		</div-->
+
+        <script type="text/javascript" src="../js/index.js"></script>
+    </body>
+</html>

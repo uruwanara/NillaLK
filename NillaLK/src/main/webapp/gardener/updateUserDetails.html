@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        
+		<title>Gardener Profile</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('Gardener');
+
+	    	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+	    </script>
+	
+	</head>
+    <body>
+		<!-- Header of Home Page -->
+		<div class="header" id="header">
+			<div class="row">
+				<div class="content-line">
+					<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">  
+				  	<img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Find a Plant</h3>       
+				</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-UserName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+			</div>
+		</div>
+
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>
+			<a href="user_plant.html">View Plant Details</a>
+			<a href="user_shop.html">View Nearby Shops</a>
+			<a href="user_agri.html">Contact Agricultural Instructor</a>
+			<a href="user_blog.html">Blog</a>
+			<a href="user_monitorPlant.html">Monitor Plants</a>
+		</div>
+		
+		<!-- Start of Window content without header and footer -->
+        <div id="content">
+	        <div class="center">    	
+				<h1 class="header-height">Update your Details</h1>
+				<div class="col-12">
+					<form>
+						<div class="col-12 col-s-12">
+							<label for="e-mail"><b>E mail</b></label>
+							<input class="textData textData-s" type="text" id="email" placeholder="E mail">
+						</div>
+						<div class="col-6 col-s-12">
+							<label for="fname"><b>First Name</b></label>
+							<input class="textData textData-s" type="text" id="fname" placeholder="First Name">
+						</div>
+						<div class="col-6 col-s-12">
+							<label for="lname"><b>Last Name</b></label>
+							<input class="textData textData-s" type="text" id="lname" placeholder="Last Name">
+						</div>	
+						<div class="col-12 col-s-12">
+							<label for="contactNo"><b>Contact Number</b></label>
+							<input class="textData textData-s" type="text" id="contactNo" placeholder="Contact Number">
+						</div>
+						<div class="col-12 col-s-12">
+							<label for="location"><b>Location</b></label>
+							<input class="textData textData-s" type="text" id="location" placeholder="Location">
+						</div>
+						<div>
+							<p onclick="openpswChange()">Password change</p>
+						</div>
+						<div class="col-12 col-s-12">
+							<div class="col-12" style="text-align: right;">
+								<button class="btn btn-s" onclick="">Deactivate</button>
+								<button class="btn btn-s" onclick="">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- Change Password Pop up -->
+		<div class="popup-2" id="pswChange">
+            <div class="col-12" style="text-align: right">
+                <input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closepswChange()">
+            </div>
+            <div class="center">
+	            <div class="col-12" style="text-align: left">
+	            	<form>
+			    		<h3>Current Password</h3>
+			            <input class="textData textData-s" type="text">
+			            <h3>New Password</h3>
+			            <input class="textData textData-s" type="text">
+			            <h3>Confirm New Password</h3>
+			            <input class="textData textData-s" type="text">
+						<div class="col-12" style="text-align: right; margin-bottom: 20px;"">
+							<button class="btn btn-s" onclick="">Change Password</button>
+						</div>
+	            	</form>
+	            </div>
+	    	</div>  
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>		   	    
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_User.js"></script>
+    </body>
+</html>

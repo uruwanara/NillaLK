@@ -1,0 +1,22 @@
+<script>
+	$("button").click(function(){
+		var pestID = $(this).val();
+		openPestDesc(pestID);
+	});
+</script>
+
+<div class="col-3">
+	<div class="col-3 border-imgtxt">
+		<div class="col-12">
+			<img src="../img/placeholder.jpg" class="block-img">
+			<!--img data-src="pestImg" class="block-img"-->
+		</div>
+		<div class="col-12" style="text-align: center;">
+			<h3 data-content="pestNameSin"></h3>
+			<h3 data-content="pestNameEng"></h3>
+		</div>
+		<div>
+			<button class="btn" data-value="pestID">View</button>
+		</div>			
+	</div>
+</div>

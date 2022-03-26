@@ -1,0 +1,21 @@
+<script>
+	$("button").click(function(){
+		var userID = $(this).val();
+		openViewUser(userID);
+	});
+</script>
+<div class="col-12 border">
+	<div class="col-1">
+		<img data-src="profilePicture" width="70%">
+	</div>
+	<div class="col-4">
+		<h3 data-content="name"></h3>
+		<b data-content="registered"></b>	
+	</div>
+	<div class="col-3" style="margin-top: 10px;">
+		<h3 data-content="userType"></h3>
+	</div>
+	<div class="col-2">
+		<button data-value="userID" class="btn"></button>
+	</div>
+</div>

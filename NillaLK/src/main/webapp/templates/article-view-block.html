@@ -1,0 +1,24 @@
+<script>
+	var desc = JSON.parse(localStorage.getItem("article"));
+	document.getElementById('render-content').innerHTML =
+		marked(desc);
+	localStorage.removeItem("article");
+</script>
+		
+<div id="article">
+	<div class="col-12 border">
+		<div class="col-3">
+			<img data-src="articleImg" class="block-img">
+		</div>
+		<div class="col-6">
+			<h1 data-content="articleTitle"></h1>
+			<h4 data-content="articleDate"></h4>
+		</div>
+		<div class="col-3">
+			<img data-src="articleImg" class="block-img">
+		</div>
+	</div>
+	<div class="col-12">
+		<div id="render-content"></div>
+	</div>
+</div>

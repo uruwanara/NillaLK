@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <title>Gardener Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <style>
+        	#addWaterSys1 { display: none; } 
+        </style>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('Gardener');
+			
+			//must have in every page
+			$(window).on('load', function() {
+				document.body.style.display = "block";
+			});
+		</script>
+        
+    </head>
+    <body>
+		<!-- Header of Home Page -->
+		<div class="header" id="header">
+			<div class="row">
+				<div class="content-line">
+					<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">  
+				  	<img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">IOT Device Configuration</h3>       
+				</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-UserName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+			</div>
+		</div>
+
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>
+			<a href="user_plant.html">View Plant Details</a>
+			<a href="user_shop.html">View Nearby Shops</a>
+			<a href="user_agri.html">Contact Agricultural Instructor</a>
+			<a href="user_blog.html">Blog</a>
+			<a href="user_monitorPlant.html">Monitor Plants</a>
+		</div>
+		
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>
+                
+                <img src="../img/Under_Construction.png">
+                
+				<!--div class="col-12" id="addWaterSys">
+					<div class="border">
+						<h2>Add a new Watering System</h2>
+						<p>Turn on the watering system and click "add" to configure the watering system</p>
+						<button class="btn" onclick="openConfigIOT()">Add</button>
+					</div>
+				</div>
+				<div class="col-12" id="addWaterSys1">
+					<div class="border">
+						<form id="addIOTdevice">
+			                <label class="col-3 col-s-12 font-label" for="name"><b>Watering System Name</b></label>
+			                <input class="col-9 col-s-12 textForm" type="text" id="name" name="name"><br>
+			                <label class="col-3 col-s-12 font-label" for="name"><b>WiFi SSID</b></label>
+			                <input class="col-9 col-s-12 textForm" type="text" id="name" name="name"><br>
+			                <label class="col-3 col-s-12 font-label" for="name"><b>SSID Password</b></label>
+			                <input class="col-9 col-s-12 textForm" type="text" id="name" name="name"><br>
+				            <input class="btn" type="button" value="Back" onclick="openAddWateringSys()">
+			                <input class="btn" type="Submit">
+						</form>
+					</div>
+				</div>
+
+				<!--function related to above form-->
+<!-- 				<script>
+
+					function creatingArticleSuccess(data) {
+						document.getElementById("ConfigIOT_success").style.display = "block";
+//		        		var alert = document.getElementById('divalert');
+//						alert.style.visibility = 'hidden';
+//						location.href = '/login.html';
+		        	}
+		        	
+					function creatingArticleFailed(data) {
+						/* TODO: Show error*/
+						var alert = document.getElementById('divalert');
+						alert.style.visibility = 'visible';
+						alert.innerHTML = data['reason'];
+		        	}
+				
+					$("#addIOTdevice").submit(function(e) {
+						
+						console.log("adding IOT device...");
+						e.preventDefault();
+	
+						// TODO check before submiting (ME TIKA HRIYATA BALALA DANNA ONE)
+						var articleTitle = $('#articleTitle').val();
+		        		var articleDesc = $('#articleDesc').val();
+		        		
+		        		item = {};
+		        		item['articleTitle'] = articleTitle;
+		        		item['articleDesc'] = articleDesc;
+		        		item['articleState'] = "Published";
+		        		jsonString = JSON.stringify(item);
+		        		
+		        		postAPINoAuth("api/articles", {'password': password}, jsonString, creatingArticleSuccess, creatingArticleFailed);
+						
+					});
+
+				</script>
+
+			</div>
+	
+	        <!--Configure Watering system Pop up-->
+<!-- 	        <div class="popup-2" id="ConfigIOT_msg">
+	            <div class="col-12" style="text-align: right">
+	                <input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closeConfigIOT()">
+	            </div>
+	            <div class="col-12 center" style="text-align: center;">
+	                <h2>Configure the Watering System</h2>
+	                <p>* Turn on the Watering System and Press "Configure" Button on the System</p>
+	                <p>* Connect the PC or mobile device to the WiFi network that started by the IOT device</p>
+	                <p>* After that Press "Next"</p>
+	                <button class="btn" onclick="show('addWaterSys1')" style="margin-bottom: 20px;">Next</button>
+	            </div>
+	        </div>
+	
+	        <!--Configure Watering system success Pop up-->
+<!--	        <div class="popup-1" id="ConfigIOT_success">
+	           	<div class="col-12" style="text-align: right">
+	               	<input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closesuccessConfigIOT()">
+	            </div>
+	            <div class="col-12 center" style="text-align: center;">
+	                <h2>Watering System Successfully Added!</h2>
+	                <img src="../img/success.png"  width="40px" style="margin: 10px">
+	                <p>Calibration process will be started after clicking "OK" button</p>
+	                <button class="btn" onclick="openManageWateringSys()">OK</button>
+                </div>
+-->
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_User.js"></script>
+    </body>
+</html>

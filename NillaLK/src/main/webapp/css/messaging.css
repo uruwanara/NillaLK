@@ -1,0 +1,147 @@
+.channel {
+	background-color: white;
+	filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
+	border-radius: 5px;
+	transition: 0.1s;
+}
+
+.channel:hover{
+	background-color: #F1FEDB;
+	cursor: pointer;
+	transition: 0.1s;
+}
+
+.channel.active{
+	background-color: #D0FE8D;
+	transition: 0.2s;
+}
+
+.channel-container {
+	overflow-y: auto;
+	height: 85vh;
+}
+
+.message {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+.message.sent {
+	flex-direction: row-reverse;
+}
+
+.message-container {
+	display: flex;
+	flex-direction: column-reverse;
+	overflow-y: auto;
+	height: 70vh;
+	background-color: #F9F9F9;
+}
+
+.bubble {
+	display: flex;
+	flex-direction: row;
+	background-color: white;
+	border-radius: 5px;
+	filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
+	padding: 10px;
+}
+
+.message.sent > .bubble {
+	display: flex;
+	flex-direction: row-reverse;
+	background-color: #D0FE8D;
+	border-radius: 5px;
+	filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
+	padding: 10px;
+}
+
+.msgtag {
+	display: flex;
+	flex-direction: row;
+}
+
+.message.sent > .bubble > div > p {
+	text-align: justify;
+	text-align-last: right;
+}
+
+.chat-wrappper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0px 20px 20px 20px;
+	background-color: #FEFEFE;
+	border-radius: 5px;
+	filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
+}
+
+.chat-text {
+	width: 100%;
+	height: 8vh;
+	margin: 10px 0px;
+	resize: none;
+	padding: 2.6vh 1vh;
+	border-width: 0px;
+	overflow: auto;
+	font-size: large;
+	font-weight: normal;
+}
+
+.button-rounded {
+	margin: 10px;
+	align-self: center;
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	background: #F9F9F9;
+	filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
+	border: 0px;
+}
+
+.button-rounded:enabled:active {
+	height: 42px;
+	width: 42px;
+	transition: 0.1s;
+}
+
+.button-rounded:enabled:hover {
+	cursor: pointer;
+}
+
+.button-rounded:disabled {
+	cursor: default;
+	opacity: 50%;
+}
+
+.button-rounded > .svg {
+	align-self: center;
+	fill: #7C7C7C;
+}
+
+.avatar {
+	border-radius: 50%;
+	border-color: #2F2F2F;
+	border-width: 5px;
+	width: 40px;
+	height: 40px;
+	align-self: center;
+}
+
+.msg-img-preview {
+	width: auto;
+	height: 17rem;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+hr.solid {
+	width: 100%;
+    height: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #202020;
+    border: 0 none;
+}

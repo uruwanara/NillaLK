@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/request.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">        
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <title>Admin_insertPlant</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('Admin');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+				
+    </head>
+    <body>
+        <!-- Header of Page -->
+        <div class="header" id="header">
+            <div class="row">
+                <div class="content-line">
+                    <img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">        
+                    <img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Insert Plant</h3>
+                </div>
+                <div class="content-header content-line">
+					<h4 class="header-user-name"> Admin </h4>   
+                    <!-- Drop down menu of header -->
+                    <div class="dropdown">
+                        <img src="../img/icon/user.png" class="img-header userdropbtn" onclick="showDropDown()">
+                        <div id="userDropdown" class="user-dropdown-content">
+                            <a href="updateAdminDetails.html">Manage Your Account</a><br>
+                            <a href='javascript:' onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Side Menu of Page -->
+        <div id="userSidebar" class="sidebar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin_userView.html">Users</a>
+            <a href="request.html">User Requests</a>
+            <a href="admin_blog.html">Blog</a>
+            <a href="admin_addAgriOfficer.html">Add Agricultural Officers</a>
+            <a href="assignZonal.html">Assign Zonal Department Head</a>
+            <a href="admin_advertise.html">Advertisement</a>
+        </div>
+
+        <div class="col-12">
+            <div class="col-6">
+                <div class="col-12 col-s-12">
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Plant Type">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                       <input class="textInput textInput-s" type="text" placeholder="Family">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Soil">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Plant distance">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Pit depth">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Water Days">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Harvest Days">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="PH">
+                    </div>
+
+                    <div class="col-12 col-s-12">
+                        <input class="textInput textInput-s" type="text" placeholder="Make Ground">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Plant Name">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Climate">
+                </div> 
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Germ Days">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Row Distance">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Sunlight">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Water Description">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Harvest Description">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <input class="textInput textInput-s" type="text" placeholder="Seed Bed">
+                </div>
+
+                <div class="col-12 col-s-12">
+                    <label for="picture"><b>Upload pictures</b></label>
+                </div>
+
+                <div class="col-12" style="text-align: right;">
+                    <button class="btn-s" style="background-color: #73AD21;" onclick="">Inert</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer of Other Pages -->
+        <footer>
+            <div class="footer" id="footer">
+                <p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+            </div>
+        </footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>            
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_admin.js"></script>
+    </body>
+</html>

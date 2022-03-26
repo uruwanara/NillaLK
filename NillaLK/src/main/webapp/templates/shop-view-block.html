@@ -1,0 +1,19 @@
+<script>
+	$("button").click(function(){
+		var shopID = $(this).val();
+		openShopDesc(shopID);
+	});
+</script>
+
+<div class="col-6 col-s-6">
+	<div class="border-imgtxt">
+		<div class="col-6">
+			<img src="../img/placeholder.jpg" class="block-img">	
+		</div>
+		<div class="col-6">
+			<h2 data-content="shopName"></h2>    
+			<h4 data-content="shopState"></h4>    
+			<button class="btn btn-s" data-value="shopID">View Shop</button>		
+		</div>
+	</div>
+</div>

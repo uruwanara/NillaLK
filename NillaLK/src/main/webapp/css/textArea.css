@@ -1,0 +1,108 @@
+.textInput {
+    background-image: url('imgCSS/search.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    width: 80%;
+    font-size: small;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+}
+
+.textData {
+    width: 100%;
+    font-size: small;
+    padding: 10px 5px 10px 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 8px;
+}
+.labelData {
+    width: 100%;
+    font-size: 18px;
+    padding: 8px 5px 8px 5px;
+    margin-top: 10px;
+    color: black;
+    text-align: left;
+}
+
+.textForm {
+    padding: 10px 5px 10px 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 8px;
+}
+
+/* Value Increase and Decrease button */
+.text-add_minus {
+	text-align: center;
+	border: none;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin: 0px;
+	width: 40px;
+	height: 40px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#decrease {
+  margin-right: -4px;
+  border-radius: 8px 0 0 8px;
+}
+#decrease:hover {
+	border: 2px solid Red;
+}
+#increase {
+  margin-left: -4px;
+  border-radius: 0 8px 8px 0;
+}
+#increase:hover {
+	border: 2px solid Green;
+}
+
+
+.dataBlock{
+    border-radius: 15px;
+    border: 2px solid #73AD21;
+    background-color: #73AD21;
+    color: white;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+}
+  .textType{
+    width: 100%;
+    font-size: 12px;
+    padding: 8px 16px 8px 4px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+  }
+
+@media only screen and (max-width: 600px) {
+    .textInput-s {
+        background-image: url('imgCSS/search.png');
+        background-position: 7px 7px; 
+        background-repeat: no-repeat;
+        width: 80%;
+        font-size: 12px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+    }
+    .textData-s {
+        width: 100%;
+        font-size: 12px;
+        padding: 5px 0px 5px 5px;
+        border: 1px solid #ddd;
+        margin-bottom: 5px;
+    }
+	.labelData {
+		width: 100%;
+		font-size: 12px;
+		padding: 8px 5px 8px 5px;
+		margin-top: 10px;
+	}
+}

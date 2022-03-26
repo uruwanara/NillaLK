@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/request.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">        
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <link rel="stylesheet" type="text/css" href="../css/table.css">
+        <link rel="stylesheet" type="text/css" href="../css/file-upload.css">
+        <title>Admin Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('Admin');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>				
+    </head>
+    <body>
+        <!-- Header of Page -->
+        <div class="header" id="header">
+            <div class="row">
+                <div class="content-line">
+                    <img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">        
+                    <img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Admin Dashboard</h3>
+                </div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-AdminName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+            </div>
+        </div>
+
+        <!-- Side Menu of Page -->
+        <div id="userSidebar" class="sidebar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin_userView.html">Users</a>
+            <a href="request.html">User Requests</a>
+            <a href="admin_plant.html">Plants</a>
+            <a href="admin_pests.html">Pests</a>
+            <a href="admin_blog.html">Blog</a>
+            <a href="admin_addAgriOfficer.html">Add Agricultural Officers</a>
+            <a href="assignZonal.html">Assign Zonal Department Head</a>
+            <a href="admin_advertise.html">Advertisement</a>
+        </div>
+        
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>
+
+                <form id="createAdvertise">
+                    <div class="col-12">
+                        <div class="col-12">
+                            <div class="col-2">
+                                <label class="labelData col-3">Company Name :-</label>
+                            </div>
+                            <div class="col-10">
+                                <input class="col-9 textData" name="addCompany" id="addCompany" style="font-size: medium" type="text" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-7">
+                                <label class="labelData col-3">Add Images of Advertisement :-</label>
+                            </div>
+                            <div class="col-5">
+								<button id="button-upload" class="btn button-rounded chat-upload flex" name="addImg">Upload Image</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="col-4">
+                                <label class="labelData col-3">Advertisement Details :-</label>
+                            </div>
+                            <div class="col-12">
+                                <textarea name="addDetails" id="addDetails" cols="165" rows="10" placeholder="" required></textarea>						
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <input class="btn btn-s" type="submit">
+                        <button class="btn btn-s" onclick="closeAdvertiseCreate()">Cancel</button>    
+                    </div>
+                </form>                
+
+		        <script type="text/javascript">
+		        	function creatingAddSuccess(data) {
+		        		//console.log(data);
+                        window.open("admin_advertise.html", "_self");
+			    	}
+			        	
+			        function creatingAddFailed(data) {
+                        /* TODO: Show error*/
+                        var alert = document.getElementById('divalert');
+                        alert.style.visibility = 'visible';
+                        alert.innerHTML = data['reason'];
+			    	}
+			        	
+                    $("#createAdvertise").submit(function(e) {                                
+                        console.log("creating advertisement...");
+                        e.preventDefault();
+            
+                        // TODO check before submiting
+                        var addCompany = $('#addCompany').val();
+                        var addDetails = $('#addDetails').val();
+                        var addImg = localStorage.getItem("Image");
+                            
+                        item = {};
+                        item['addCompany'] = addCompany;
+                        item['addDetails'] = addDetails;
+                        item['addImg'] = addImg;
+                        console.log(item);
+                        jsonString = JSON.stringify(item);
+                                
+                        postAPI("api/advertisements", {}, jsonString, creatingAddSuccess, creatingAddFailed);
+                                
+                    });			        	
+			    </script>
+				<script type="text/javascript">
+					$('#button-upload').click(function() {
+						$('#f-upload-window').show();
+					});
+	
+					$('body').loadTemplate('../templates/file-upload.html', {type: 'Other', scope: 'Public'}, {append: true, success: function() {
+						$("#upload-form").submit(function(e) {
+						    e.preventDefault();
+							
+							console.log('uploading...')
+							
+							uploadAPI(new FormData(e.target), function(data) {
+								//on success
+								console.log(data.path);
+								localStorage.setItem("Image", data.path);
+								closeUploadWindow();
+							}, function(error) {
+								console.error(error);
+								//on failure
+							});
+						});
+					}});				
+				</script>
+
+                <div class="col-12"><div class="footer-height"></div></div>
+            </div>
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>		      
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_admin.js"></script>
+    </body>
+</html>       

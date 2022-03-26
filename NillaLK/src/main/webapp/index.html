@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/button.css">
+        <link rel="stylesheet" type="text/css" href="css/font.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/img.css">
+        <link rel="stylesheet" type="text/css" href="css/header.css">
+        <link rel="stylesheet" type="text/css" href="css/footer.css">
+        <title>Welcome to Nilla.lk</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+	    
+	    <script>
+	    	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+	    </script>
+        
+    </head>
+    
+	<body>
+		<!-- Header of Home Page -->
+		<div class="header" id="header-home">
+			<div class="row">
+			  	<img src="img/logo.png" class="logo-header">        
+				<div class="content-header">
+					<a class="active" href="index.html"><b>Home</b></a>
+					<a href="home/home_plant.html"><b>Plants</b></a>
+					<a href="home/home_shop.html"><b>Shops</b></a>
+					<a href="home/home_blog.html"><b>Blog</b></a>
+					<a href="home/home_agri.html"><b>Contact</b></a>
+					<a href="home/home_about.html"><b>About us</b></a>
+				</div>
+			</div>
+		</div>
+		<!-- Content Start -->
+		<div class="center">
+			<div class="row">
+                <div class="col-6 col-s-12 header-height">
+                    <img src="img/icon/nillaIcon2.png" class="ontop">
+                    <h1 class="font-index">Let's Start with Nilla</h1>
+                    <p class="">Home gardening has become a struggle for most of the people in urban areas because of the difficulty to find guides on gardening and their time constraints. Some residents in urban areas avoid gardening because of their busy day-to-day life. They do not have enough time for watering and tending plants, as they will have to spend several hours outside their residents. Nilla.lk came up with a solution for several identified problems that urban residents face when they tend to start gardening.</p>    
+                    <!--User Type Select Pop up-->
+                    <button class="btn btn-s" onclick="openChooseUserType()">Sign Up</button>
+                    <!--Login window-->
+                    <button class="btn btn-s" onclick="openLogin()">Log in</button>
+                </div>
+                <div class="col-6 col-s-hide">
+					<img src="img/background/background1.png" class="background">
+                </div>
+            </div>
+            
+			<div class="row">
+                <div class="col-6 col-s-hide">
+					<img src="img/background/background2.png" class="background">
+                </div>
+                <div class="col-6 col-s-12" style="text-align: right;">
+                    <img src="img/icon/plantIcon.png" class="ontop">
+                    <h1 class="font-index">Plants in Nilla</h1>
+                    <p class="">Don't you have a good knowledge on Plants that you are going to grow in your garden. Don't worry we can give all the knowledge that you want to grow that plant. Not only knowledge we can remind about it also</p>    
+                    <button class="btn btn-s" onclick="openHomePlant()">More...</button>
+                </div>
+            </div>
+            
+			<div class="row">
+                <div class="col-3 col-s-hide">
+					<img src="img/background/background3.png" class="background">
+                </div>
+                <div class="col-6 col-s-12" style="text-align: center;">
+                    <img src="img/icon/shopIcon.png" class="ontop">
+                    <h1 class="font-index">Shops in Nilla</h1>
+                    <p class="">Is the most difficult part is to find the shops which have items to buy. Don't worry we solve that problem also. Through Nilla you can nearest shops in your area very easily.</p>    
+                    <button class="btn btn-s" onclick="openHomeShop()">More...</button>
+                </div>
+                <div class="col-3 col-s-hide">
+					<img src="img/background/background4.png" class="background">
+                </div>
+            </div>            
+
+			<div class="row">
+                <div class="col-6 col-s-hide">
+					<img src="img/background/background5.png" class="background">
+                </div>
+                <div class="col-6 col-s-12" style="text-align: right;">
+                    <img src="img/icon/blogIcon.png" class="ontop">
+                    <h1 class="font-index">Blog of Nilla</h1>
+                    <p class="">Are you a guy who is willing to share your ideas with community. Also, are you a guy who is willing to take others ideas for better gardening practices. Now this is your chance visit the BLOG of nilla</p>    
+                    <button class="btn btn-s" onclick="openHomeBlog()">More...</button>
+                </div>
+            </div>
+            
+			<div class="row">
+                <div class="col-6 col-s-12">
+                    <img src="img/icon/agriIcon.png" class="ontop">
+                    <h1 class="font-index">Agricultural Instructors with Nilla</h1>
+                    <p class="col-s-hide">Do you have so many problems when planting. Now this is your chance to solve all those questions. You can get the professional guides through Agricultural Instructors of your area. Share your problem with Instructors and find a SOLUTION</p>    
+                    <button class="btn btn-s" onclick="openHomeAgri()">More...</button>
+                </div>
+                <div class="col-6 col-s-hide">
+					<img src="img/background/background6.png" class="background">
+                </div>                
+            </div>
+            <div class="row left">
+            	<button class="" onclick="darkMode()">Mode</button>
+            </div>
+		</div>
+		<!-- Content End -->
+		<!-- Footer of Home Page -->
+		<div class="footer_Home">
+			<div class="col-12">
+		    	<div class="col-4">
+		        	<img src="img/whiteLogo.png" class="footer-logo" >
+		        </div>
+			    <div class="col-4">
+			    	<ul>
+				        <li><a href="index.html">Home</a></li>
+				        <li><a href="home/home_plant.html">Plants in Nilla</a></li>
+				        <li><a href="home/home_shop.html">Shops in Nilla</a></li>
+				        <li><a href="home/home_blog.html">Blog of Nilla</a></li>
+				        <li><a href="home/home_agri.html">Agriculture Instructors with Nilla.lk</a></li>
+				        <li><a href="home/home_about.html">About US</a></li>
+			    	</ul>
+			    </div>
+			    <div class="col-4 content-line">
+				    <img src="img/facebook.png" class="footer-icon">
+				    <img src="img/youtube.png" class="footer-icon">
+					<img src="img/twitter.png" class="footer-icon">
+			    </div>
+			</div>
+			<div class="col-12 footer-bottom">
+		    	<p>All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</div>
+		
+        <!-- Pop up window for select user type -->
+		<div class="popup-3" id="ChooseUserType">
+      		<div class="col-12" style="text-align: right">
+            	<input type="image" src="img/close.png" class="close-icon close-icon-s" onclick="closeChooseUserType()">
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <h1>Register with Nilla.lk</h1>
+                <h3>You are a,</h3>
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <div class="col-4">
+                    <input type="image" src="img/Reg_Gardener.png" id="Gardener" name="Gardener" class="imgIcon imgIcon-s">
+                </div>
+                <div class="col-4">
+                    <input type="image" src="img/Reg_ShopOwner.png" id="ShopOwner" name="ShopOwner" class="imgIcon imgIcon-s">
+                </div>
+                <div class="col-4">
+                    <input type="image" src="img/Reg_AgriInstructor.png" id="Instructor" name="Instructor" class="imgIcon imgIcon-s">
+                </div>
+            </div>
+		</div>
+
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/header.js"></script>
+    </body>
+</html>

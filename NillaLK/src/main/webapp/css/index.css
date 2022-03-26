@@ -1,0 +1,49 @@
+.ontop{
+    width: 30%;
+    height: auto;
+    margin: 0px;
+}
+
+.background {
+	width: 100%;
+	height: auto;
+}
+.icon {
+	width: 40px;
+	height: 40px;
+}
+
+.img-index-top {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%;
+	height: auto;
+}
+.font-index-top {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.dark-mode {
+	background-color: #363636;
+	color: #92d034;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .ontop{
+        width: 20%;
+        height: auto;
+        margin: 0px;
+    }
+    .font-index{
+        font-size: 24 px;
+    }
+	.icon {
+		width: 30px;
+		height: 30px;
+	}
+}

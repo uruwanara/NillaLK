@@ -1,0 +1,25 @@
+<script>
+	$("button").click(function(){
+		var productID = $(this).val();
+		openUpdateShopProduct(productID);
+	});
+</script>
+
+<div class="col-6 border" style="margin-bottom: 5px;">
+	<div class="col-4">
+		<img src="../img/placeholder.jpg" height="100px" style="padding-right: 10px;">
+	</div>
+	<div class="col-4" style="text-align: left;">
+		<h2 data-content="productName">Egg Plant</h2>
+		<p data-content="productExp">T56 - 2 weeks old plants in good condition </p>
+		<h3 data-content="productPrice">45</h3>
+	</div>
+	<div class="col-4">
+		<!--div class="col-12">
+			<button class="btn" data-value="productID" style="background-color: red;">Remove</button>
+		</div-->
+		<div class="col-12">
+			<button class="btn" data-value="productID">Update</button>
+		</div>	
+	</div>
+</div>

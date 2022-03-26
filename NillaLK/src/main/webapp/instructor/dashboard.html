@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <title>Agriculture Instructor Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('AgriInstructor');
+			
+			//must have in every page
+			$(window).on('load', function() {
+				document.body.style.display = "block";
+			});
+		</script>
+	</head>
+	<body>
+			<!-- Header of Home Page -->
+			<div class="header" id="header">
+				<div class="row">
+					<div class="content-line">
+						<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">  
+					  	<img src="../img/logo_green.png" class="logo-header">
+					  	<h3 class="header-title">Agriculture Instructor Dashboard</h3>       
+					</div>
+					<div class="content-header content-line">
+					  	<h4 class="header-user-name"> Agriculture Instructor </h4>     
+						<!-- Drop down menu of header -->
+						<div class="dropdown">
+							<img src="../img/icon/user.png" class="img-header userdropbtn" onclick="showDropDown()">
+							<div id="userDropdown" class="user-dropdown-content">
+							    <a href="updateUserDetails.html">Manage Your Account</a><br>
+							    <a href='javascript:' onclick="logout()">Logout</a>
+							</div>
+						</div>      
+					</div>
+				</div>
+			</div>
+	
+			<!-- Side Menu of Page -->
+			<div id="userSidebar" class="sidebar">
+				<a href="dashboard.html">Dashboard</a>
+				<a href="agri_plant.html">Plant</a>
+				<a href="agri_blog.html">Blog</a>
+			</div>
+
+    <!-- Start of Window content without header and footer -->
+    <div id="content">
+        <div class="center">
+			<div class="col-3 header-height" style="padding-bottom: 150px;"></div>
+			<div class="col-9 header-height" style="padding-bottom: 150px; padding-top: 100px;">
+            <img src="../img/agri/contactGardeners.png" height="140px" style="padding-right: 10px; cursor: pointer;" onclick="openChat()">
+			<img src="../img/agri/plants.png" height="140px" style="padding-right: 10px; cursor: pointer;" onclick="openPlant()">
+			<img src="../img/agri/pestagri.png" height="140px" style="padding-right: 10px; cursor: pointer;" onclick="openPest()">
+			<img src="../img/agri/disease.png" height="140px" style="padding-right: 10px; cursor: pointer;" onclick="openDisease()">
+			<img src="../img/agri/blogagri.png" height="140px" style="padding-right: 10px; cursor: pointer;" onclick="openblog()">
+		</div>
+        </div>
+ 
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		           
+        <script type="text/javascript" src="../js/logout.js"></script>		          
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_agri.js"></script>
+    </body>
+</html>

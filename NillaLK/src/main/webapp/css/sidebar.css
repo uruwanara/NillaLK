@@ -1,0 +1,33 @@
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    overflow-x: hidden;
+    transition: 0.5s;
+    margin-top: 70px;
+    box-shadow: 0px 1px 10px 0px rgb(197, 197, 197);
+}
+.sidebar a {
+    background: rgb(255, 255, 255);        
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+.sidebar a:hover {
+    background: #92d034;
+  
+}
+
+#content {
+    transition: margin-left .5s;
+    padding: 16px;
+}

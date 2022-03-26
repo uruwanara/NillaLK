@@ -1,0 +1,156 @@
+<html>
+    <head>
+    	<link rel="stylesheet" type="text/css" href="css/forms.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/button.css">
+        <link rel="stylesheet" type="text/css" href="css/font.css">
+        <link rel="stylesheet" type="text/css" href="css/img.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <title>Log in to Nilla.lk</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+	    
+	    <script>
+	    	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+	    </script>
+        
+    </head>
+    <body>
+    
+        <div class="container container-s">
+            <div class="col-6 col-s-12">
+                <img src="img/logo.png" class="logo">
+                <h4>Not a user of Nilla.lk</h4>
+
+				<!--Choose User Type Pop up Window-->
+                <h3 class="btn-word" onclick="openChooseUserType()">Register with us</h3>
+            </div>
+         
+            <div class="col-6 col-s-12" style="text-align: left;">
+            
+            	<!-- TEMPORARY. REPLACE FOLLOWING IN FORMS.CSS!!!!!!!!!!!!!! -->
+            	<div class="alert" style="visibility: hidden" id="login-alert">
+            		error text
+            	</div>
+  				
+            	<!-- Login Form -->
+            	<form id="login-form">
+            		<label class="font-login" for="email">Email</label>
+	                <input class="textInput textInput-s" id="email" type="email" placeholder="Enter Email" autocomplete="username" required>
+	                <label class="font-login" for="password">Password</label>
+	                <input class="textInput textInput-s" id="password" type="password" placeholder="Enter Password" autocomplete="password" required>
+
+					<h5>Forgot Your Password?</h5>
+                	<h4 class="btn-word" onclick="openResetPW()">Click here</h4>
+                	
+					<div style="text-align: center;">
+						<input class="btn btn-s" type="submit">
+						<button class="btn btn-s" onclick="cancelLogin()">Cancel</button>   
+	                </div>
+            	</form>
+            	
+            	<script>
+		        	function loginSuccess(data) {
+		        		// update user meta
+		        		if(storageAvailable('localStorage')) {
+		        			
+		        			// set/update user meta
+		        			window.localStorage.setItem('user-meta', JSON.stringify(data));
+		        			
+		        			var referer = GetURLParameter('referer')
+		        			if(referer == null) {
+		        				var userType = data['userType']
+			        			if(userType == 'Gardener') {
+			        				location.href = '/gardener/dashboard.html';
+			        			} else if(userType == 'Admin') {
+			        				location.href = '/admin/dashboard.html';
+			        			} else if(userType == 'ZonalAgriHead') {
+			        				location.href = '/agrihead/dashboard.html';
+			        			} else if(userType == 'AgriInstructor') {
+			        				location.href = '/instructor/dashboard.html';
+			        			} else if(userType == 'ShopOwner') {
+			        				location.href = '/shopowner/dashboard.html';
+			        			}
+		        			} else {
+		        				location.href = referer;
+		        			}
+		        			
+		        		} else {
+		        			console.log("Local storage is not supported in this browser. Session would not be stored!")
+		        		}
+		        	}
+		        	
+					function loginFailed(data) {
+						/* TODO: Show error*/
+						var alert = document.getElementById('login-alert');
+						alert.style.visibility = 'visible';
+						alert.innerHTML = data['reason'];
+		        	}
+					
+					$("#login-form").submit(function(e) {
+						
+						console.log("loging in...");
+						e.preventDefault();
+						var email = $('#email').val();
+		        		var password = $('#password').val();
+		        		postAPINoAuth("auth", {'password': password, 'email': email}, null, loginSuccess, loginFailed);
+						
+					});
+	        	</script>
+
+                <!--Password Reset Pop up Window-->
+                <div class="popup-3" id="ResetPWPopup">
+	            	<div class="col-12" style="text-align: right">
+	                	<input type="image" src="img/close.png" class="close-icon close-icon-s" onclick="closeResetPW()">
+	                </div>
+	                <div class="content content-s">
+	                    <div class="col-12" style="text-align: center;">
+	                        <img src="img/logo.png" class="logo-popup">
+	                        <h2 style="color: green;">Reset the Password</h2>
+	                    </div>
+	                    <div class="col-12" style="text-align: left;">
+	                        <h3 class="font-login">Enter the Email Address</h3>
+	                        <input class="textInput textInput-s" type="text" placeholder="Enter Email">
+	                    </div>
+	                    <div class="col-12" style="text-align: center;">
+	                        <button class="btn btn-s">Reset Password</button>
+	                    </div>
+					</div>
+                </div>
+
+            </div>
+        </div>
+		        
+		<!-- Pop up window for select user type -->
+		<div class="popup-3" id="ChooseUserType">
+			<div class="col-12" style="text-align: right">
+		       	<input type="image" src="img/close.png" class="close-icon close-icon-s" onclick="closeChooseUserType()">
+		    </div>
+		    <div class="col-12" style="text-align: center;">
+		        <h1>Register with Nilla.lk</h1>
+		        <h3>You are a,</h3>
+		    </div>
+		    <div class="col-12" style="text-align: center;">
+		        <div class="col-4">
+			        <input type="image" src="img/Reg_Gardener.png" id="Gardener" name="Gardener" class="imgIcon imgIcon-s">
+		        </div>
+		        <div class="col-4">
+		            <input type="image" src="img/Reg_ShopOwner.png" id="ShopOwner" name="ShopOwner" class="imgIcon imgIcon-s">
+		        </div>
+		        <div class="col-4">
+		     	   <input type="image" src="img/Reg_AgriInstructor.png" id="Instructor" name="Instructor" class="imgIcon imgIcon-s">
+		        </div>
+		    </div>
+		</div>
+				
+        <script src="js/index.js"></script>
+    </body>
+</html>

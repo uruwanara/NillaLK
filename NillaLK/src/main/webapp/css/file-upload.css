@@ -1,0 +1,116 @@
+.f-upload-body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Arial, Helvetica, sans-serif;
+    z-index:10000;
+}
+
+.f-upload-wrapper {
+	display: flex;
+	flex-direction: row;
+	width: 90%;
+	height: 90%;
+	max-height: 25rem;
+	max-width: 35rem;
+	border-radius: 20px;
+	background-color: white;
+	filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, .2));
+}
+
+.f-file-area {
+	width: 65%;
+	background-color: #F9F9F9;
+	border-radius: 20px 0px 0px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.f-upload-area {
+	width: 35%;
+	border-radius: 0px 20px 20px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.f-upload-form {
+	height: 90%;
+	width: 100%;
+	align-content: center;
+	align-self: center;
+}
+
+.f-abs-area {
+	height: 100px;
+	width: 155px;
+	position: absolute;
+	display: flex;
+}
+
+.f-abs-div {
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-width: medium;
+	border-style: dashed;
+	border-radius: 20px;
+	border-color: #92D034;
+	font-weight: bold;
+	font-size: x-large;
+	z-index: -1;
+}
+
+.f-btn {
+	cursor: pointer;
+	background: #F9F9F9;
+	filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .2));
+	margin: 10px;
+	align-self: center;
+	border-width: 0px;
+}
+
+.f-btn.close {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(0, 0, 0, 0);
+	align-self: inherit;
+}
+
+.f-btn.choose {
+	margin: 20px;
+	opacity: 0;
+}
+
+.f-btn.upload {
+	margin: 20px;
+	height: 20%;
+	width: 80%;
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: large;
+}
+
+.f-preview-img{
+	width: auto;
+	height: auto;
+	max-height: 90%;
+	max-width: 90%;
+	filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, .2));
+}
+
+.f-close-button > .svg {
+	align-self: center;
+	fill: #7C7C7C;
+}

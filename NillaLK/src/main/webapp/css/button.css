@@ -1,0 +1,163 @@
+.btn {
+  background-color: #92d034; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.btn-mini {
+  background-color: #92d034; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.btn-add_minus {
+  display: inline-block;
+  border: 1px solid #ddd;
+  margin: 0px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 11px 0;
+  background: #eee;
+  cursor: pointer;
+}
+
+.btn-remove {
+  background-color: #d03434; /* Green */
+  border-style: solid;
+  border-color: #d03434;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: small;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.btn-word {
+  cursor: pointer;
+}
+
+.btn-search {
+  border-radius: 20px;
+  width: 15%;
+  background-color: #92d034;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: small;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.btn-click {
+  width: 50px;
+  height: 50px;
+  background-color: #92d034;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 25px;
+  margin: 10px 20px 10px 0px;
+  cursor: pointer;
+}
+.btn-pReq {
+  border-radius: 15px;
+  border: 2px solid #73ad21;
+  background-color: #73ad21;
+  color: white;
+  font-weight: bold;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-focus {
+  width: 100%;
+  background-color: #73ad21;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px 20px 10px 0px;
+  cursor: pointer;
+}
+
+/*Set of buttons [G_Dash]*/
+.btn-list {
+  padding: 5px;
+  text-align: left;
+  font-size: 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  .btn-s {
+    background-color: #73ad21;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+  .btn-s-search {
+    border-radius: 20px;
+    width: 15%;
+    background-color: #73ad21;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .btn-s-click {
+    width: 30px;
+    height: 30px;
+    background-color: #73ad21;
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+    margin: 5px 10px 5px 0px;
+    cursor: pointer;
+  }
+  .btn-s-focus {
+    width: 100%;
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    margin: 5px 10px 5px 0px;
+    cursor: pointer;
+  }
+}

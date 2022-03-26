@@ -1,0 +1,329 @@
+<html>
+    <head>
+    	<link rel="stylesheet" type="text/css" href="css/forms.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css">
+        <link rel="stylesheet" type="text/css" href="css/button.css">
+        <link rel="stylesheet" type="text/css" href="css/font.css">
+        <link rel="stylesheet" type="text/css" href="css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="css/img.css">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <title>Register with Nilla.lk</title>
+                
+		<!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="js/jquery.loadTemplate.js"></script>
+	    
+	    <script>
+	    	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    		
+	    		$("#userType").val(GetURLParameter('userType'));
+	    	});
+	    </script>
+		
+    </head>
+    <body>
+
+        <div class="container container-s">
+            <!--Form Begin-->
+            <div class="col-6 col-s-12">
+            	<img src="img/logo.png" class="block-img">
+            </div>
+            <div class="col-6 col-s-12">
+            
+            
+            <!-- Global handles for registration failed, success -->
+            <script>
+            
+	            function registrationFailed(data) {
+	            	
+	            	console.log('Registration failed');
+	            	
+					var alert = document.getElementById('divalert');
+					alert.style.visibility = 'visible';
+					alert.innerHTML = data['reason'];
+	        	}
+	            
+	        	function registrationCompleted(data) {
+	        		
+	        		console.log('Registration completed');
+	        		
+	        		var alert = document.getElementById('divalert');
+	        		alert.className = "alert success";
+					alert.innerHTML = 'Registration successful!';
+					alert.style.visibility = 'visible';
+					
+					setTimeout(function(){
+						location.href = '/login.html';
+					}, 1000);
+
+	        	}
+	        	
+            
+            </script>
+            
+	            <!-- TEMPORARY. REPLACE FOLLOWING IN FORMS.CSS!!!!!!!!!!!!!! -->
+	           	<div class="alert" style="visibility: hidden" id="divalert">
+	           		error text
+	           	</div>
+	           	
+	            <div class="col-12" id="RegUser" style="display: block">
+	                <h2 id="helloMsg">Hello User,</h2>
+            		<h3>Sign Up with us.....</h3>
+            	
+            		<form id="reg-step1">
+            			<input class="textData textData-s" id="userType" type="hidden">
+		            	<input class="textData textData-s" type="text" id="fname" placeholder="First Name" autocomplete="given-name" required> 
+	            		<input class="textData textData-s" type="text" id="lname" placeholder="Last Name" autocomplete="family-name" required> 
+	            		<input class="textData textData-s" type="email" id="email" placeholder="Email" autocomplete="email" required> 
+	            		<input class="textData textData-s" type="password" id="pwd" placeholder="Password" autocomplete="new-password" required> 
+	            		<input class="textData textData-s" type="password" id="repwd" placeholder="Confirm Password" autocomplete="new-password" required>
+	            		<div style="text-align: right;">
+				        	<input class="btn btn-s" type="submit">  
+				            <button class="btn btn-s" onclick="clearRegUser()">Clear</button>    
+				            <button class="btn btn-s" onclick="cancelRegistration()">Cancel</button>    
+				        </div>
+	            	</form>
+	            	
+	            	<script>
+			        	function registrationSuccess(data) {
+			        		var alert = document.getElementById('divalert');
+							$('#RegUser').hide();
+							
+							console.log('Registration success. Showing registration completion window');
+							let ut = $("#userType").val();
+							if(ut == 'Gardener') {
+								$('#reg-Gardener').show();
+							} else if(ut == 'Admin') {
+								$('#reg-Admin').show();
+							} else if(ut == 'ShopOwner') {
+								$('#reg-ShopOwner').show();
+							} else if(ut == 'AgriInstructor') {
+								$('#reg-AgriInstructor').show();
+							}
+			        	}
+						
+						$("#reg-step1").submit(function(e) {
+							
+							console.log("registering user...");
+							e.preventDefault();
+
+							// TODO validate
+							var fname = sanitize($('#fname').val());
+			        		var lname = sanitize($('#lname').val());
+			        		var email = sanitize($('#email').val());
+			        		var password = sanitize($('#pwd').val());
+			        		
+			        		item = {};
+			        		item['email'] = email;
+			        		item['firstName'] = fname;
+			        		item['lastName'] = lname;
+			        		item['userType'] = sanitize($("#userType").val());
+			        		jsonString = JSON.stringify(item);
+			        		
+			        		postAPINoAuth("api/users", {'password': password}, jsonString, registrationSuccess, registrationFailed);
+							
+						});
+		        	</script>
+		        	
+		        </div>
+		        <!-- Gardener Registration -->
+	            <div class="col-12" id="reg-Gardener" style="display: none">
+	            	<form id="reg-step2-gardener">
+	            		<input class="textData textData-s" type="text" id="g_verification" placeholder="CODECODE"> 
+		            	<h3 class="text-left">Address</h3>
+		            	<input class="textData textData-s" type="text" id="g_addLine1" placeholder="Address Line 1"> 
+		            	<input class="textData textData-s" type="text" id="g_addLine2" placeholder="Address Line 2"> 
+		            	<input class="textData textData-s" type="text" id="g_city" placeholder="City"> 
+		            	<input class="textData textData-s" type="text" id="g_district" placeholder="District">	                
+		            	<div class="col-12">
+		            		<div class="col-6">
+			            		<input class="textData textData-s" width="100%" type="text" id="g_contactNum" placeholder="Contact Number">
+		            		</div>
+		            		<div class="col-6 content-line">
+				            	<h4 class="text-left">Date of Birth</h4>
+				           		<input class="" type="date" id="g_dob" placeholder="Date of Birth"> 	            		
+		            		</div>
+		            	</div>
+		            	
+		            	<div style="text-align: right;">
+				        	<input class="btn btn-s" type="submit">  
+				            <button class="btn btn-s" onclick="clearRegUser()">Clear</button>    
+				            <button class="btn btn-s" onclick="cancelRegistration()">Cancel</button>    
+				        </div>
+					</form>
+	            	
+	            	<script>
+	            	
+						$("#reg-step2-gardener").submit(function(e) {
+							
+							console.log("completing gardener registration...");
+							e.preventDefault();
+
+							// TODO validate
+							var contactNum = sanitize($('#g_contactNum').val());
+							var dob = sanitize($('#g_dob').val());
+							var addLine1 = sanitize($('#g_addLine1').val());
+							var addLine2 = sanitize($('#g_addLine2').val());
+							var city = sanitize($('#g_city').val());
+							var district = sanitize($('#g_district').val());
+							
+							//change date format to dd-mm-yyyy
+							var splitDoB = dob.split('-');
+							if(splitDoB[0].length == 4) {
+								dob = splitDoB[2] + '-' + splitDoB[1] + '-' + splitDoB[0];
+							}
+							
+							var verification = sanitize($('#g_verification').val());
+							var email = sanitize($('#email').val());
+			        		var password = sanitize($('#pwd').val());
+							
+							addressItem = {};
+							addressItem['addLine1'] = addLine1;
+							addressItem['addLine2'] = addLine2;
+							addressItem['city'] = city;
+							addressItem['district'] = district;
+			        		
+			        		item = {};
+			        		item['contactNum'] = contactNum;
+			        		item['dob'] = dob;
+			        		item['address'] = addressItem;
+			        		jsonString = JSON.stringify(item);
+			        		
+			        		postAPINoAuth("api/users", {'password': password, 'email': email, 'verification': verification}, jsonString, registrationCompleted, registrationFailed);
+							
+						});
+		        	</script>
+	            	
+	            </div>
+	            
+	            <!-- Shop Owner Registration -->
+	            <div class="col-12" id="reg-ShopOwner" style="display: none">
+	            	<form id="reg-step2-shopowner">
+		            	<input class="textData textData-s" type="text" id="so_verification" placeholder="CODECODE"> 
+		            	<input class="textData textData-s" type="text" id="so_contactNum" placeholder="Contact Number"> 
+		            	
+		            	<div style="text-align: right;">
+				        	<input class="btn btn-s" type="submit">  
+				            <button class="btn btn-s" onclick="clearRegUser()">Clear</button>    
+				            <button class="btn btn-s" onclick="cancelRegistration()">Cancel</button>    
+				        </div>
+					</form>
+	            	
+	            	<script>
+
+						$("#reg-step2-shopowner").submit(function(e) {
+							
+							console.log("completing shopowner registration...");
+							e.preventDefault();
+
+							// TODO check before submiting
+							var contactNum = sanitize($('#so_contactNum').val());
+					
+							var verification = sanitize($('#so_verification').val());
+							var email = sanitize($('#email').val());
+			        		var password = sanitize($('#pwd').val());
+								        		
+			        		item = {};
+							item['contactNum'] = contactNum;
+			        		jsonString = JSON.stringify(item);
+			        		
+			        		postAPINoAuth("api/users", {'password': password, 'email': email, 'verification': verification}, jsonString, registrationCompleted, registrationFailed);
+							
+						});
+		        	</script>
+	            	
+	            </div>
+
+		        <!-- Agri Registration -->
+	            <div class="col-12" id="reg-AgriInstructor" style="display: none">
+	            	<form id="reg-step2-agriInstructor">
+	            		<input class="textData textData-s" type="text" id="ai_verification" placeholder="CODECODE"> 
+		            	<h3 class="text-left">Address</h3>
+		            	<input class="textData textData-s" type="hidden" id="ai_profilePicture" value="files/public/profile-placeholder.jpg">
+		            	<input class="textData textData-s" type="text" id="ai_nic" placeholder="NIC"> 
+		            	<input class="textData textData-s" type="text" id="ai_contactNum" placeholder="Contact Number"> 
+		            	
+		            	<div style="text-align: right;">
+				        	<input class="btn btn-s" type="submit">  
+				            <button class="btn btn-s" onclick="clearRegUser()">Clear</button>    
+				            <button class="btn btn-s" onclick="cancelRegistration()">Cancel</button>    
+				        </div>
+					</form>
+	            	
+	            	<script>
+	            	
+						$("#reg-step2-agriInstructor").submit(function(e) {
+							
+							console.log("completing agriInstructor registration...");
+							e.preventDefault();
+
+							// TODO validate
+							var nic = sanitize($('#ai_nic').val());
+							var contactNum = sanitize($('#ai_contactNum').val());
+							
+							var verification = sanitize($('#ai_verification').val());
+							var email = sanitize($('#email').val());
+			        		var password = sanitize($('#pwd').val());
+							
+			        		item = {};
+			        		item['nic'] = nic;
+			        		item['contactNum'] = contactNum;
+			        		jsonString = JSON.stringify(item);
+			        		
+			        		postAPINoAuth("api/users", {'password': password, 'email': email, 'verification': verification}, jsonString, registrationCompleted, registrationFailed);
+							
+						});
+		        	</script>
+	            	
+	            </div>	           
+            </div>
+	           	<!-- <div class="col-12" id="RegVerify">
+	                <h2>Welcome to Nilla.</h2>
+            		<h3 class="text-left">To Complete this registration process check your email</h3>
+            		<h4 class="text-left">To verify your Email enter the verification code below</h4>
+            		<form style="margin-top: 15px;">
+		            	<input class="textData textData-s" type="text" id="verificationCode" placeholder="VERIFICATION CODE" required> 
+						<p style="margin-top: 10px;">Did not receive the email yet? <a href=""> Resend Email</a></p>
+	            	</form>
+	            	<div style="text-align: right;">
+			        	<button class="btn btn-s" onclick="openRegUser(userType)">Continue</button>
+			            <button class="btn btn-s" onclick="cancelRegistration()">Cancel</button>    
+			        </div>
+	            </div>
+            </div> -->
+		</div>
+        <!--Form End-->
+        
+        <!--Registration Successful Pop up-->
+        <!--div class="popup-1" id="Reg_Successful">
+          	<div class="col-12" style="text-align: right">
+               	<input type="image" src="img/close.png" class="close-icon" onclick="closeRegSuccessful()">
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <h2>Registration Successful!</h2>
+                <img src="img/success.png" width="40px" style="margin: 10px">
+                <h4>Please check the email for confirmation</h4>
+            </div>
+        </div>
+            
+        <!--Registration Unsuccessful Pop up-->
+        <!--div class="popup-1" id="Reg_Unsuccessful">
+           	<div class="col-12" style="text-align: right">
+               	<input type="image" src="img/close.png" class="close-icon" onclick="closeRegUnsuccessful()">
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <h2>Registration Unsuccessful</h2>
+                <img src="img/unsuccess.png" width="40px" style="margin: 10px">
+                <h4>Please check the entered email and other details</h4>
+            </div>
+		</div-->
+
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>

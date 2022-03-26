@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="js/jquery.loadTemplate.js"></script>
+</head>
+<body>
+	
+	<form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
+	    <input type="text" name="scope" />
+	    <input type="text" name="type" />
+	    <input type="hidden" name="nonce" id="nonce"/>
+	    <input type="file" name="file" />
+	    <input type="submit" />
+	</form>
+	
+	<script type="text/javascript">
+		$("#upload-form").submit(function(e) {
+		    e.preventDefault();    
+		    var nonce = authenticate();
+		    if(nonce != null) {
+		    	$("#nonce").val(nonce);
+			    var formData = new FormData(this);
+		    	$.ajax({
+			        url: "/upload",
+			        type: 'POST',
+			        data: formData,
+			        cache: false,
+			        contentType: false,
+			        processData: false
+			    }).done(function(data) {
+			    	console.log(data);
+					alert("successful");
+				}).fail(function(data) {
+					alert("failed");
+				});
+		    } else {
+		    	alert("failed");
+		    }
+		});
+	</script>
+	
+	<img alt="testimage" src="/files/content/public/test.jpg">
+	
+</body>
+</html>

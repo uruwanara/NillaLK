@@ -1,0 +1,20 @@
+<!-- Method of displaying articles in Blog -->
+<script>
+	$("button").click(function(){
+		var articleID = $(this).val();
+		openArticle(articleID);
+	});
+</script>
+
+	<div class="col-6 border">
+		<div class="col-5 col-s-6">
+			<img data-src="articleImg" class="block-img">
+		</div>
+		<div class="col-7 text-left">
+			<h1 data-content="articleTitle"></h1>
+			<!--h4 data-content="userID"></h4-->
+			<h4 data-content="articleDate"></h4>
+			<button class="btn btn-s" data-value="articleID">Read More</button>
+		</div>
+	</div>
+

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <title>Admin Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('Admin');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+		<script>
+	    	const query = window.location.search;
+	    	const urlParameter = new URLSearchParams(query);
+	    	const plantID = urlParameter.get('plantID');		
+		</script>						
+    </head>
+    <body>
+        <!-- Header of Page -->
+        <div class="header" id="header">
+            <div class="row">
+                <div class="content-line">
+                    <img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">        
+                    <img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Plants</h3>
+                </div>
+ 				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-AdminName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+            </div>
+        </div>
+
+        <!-- Side Menu of Page -->
+        <div id="userSidebar" class="sidebar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin_userView.html">Users</a>
+            <a href="request.html">User Requests</a>
+            <a href="admin_plant.html">Plants</a>
+            <a href="admin_pests.html">Pests</a>
+            <a href="admin_blog.html">Blog</a>
+            <a href="admin_addAgriOfficer.html">Add Agricultural Officers</a>
+            <a href="assignZonal.html">Assign Zonal Department Head</a>
+            <a href="admin_advertise.html">Advertisement</a>
+        </div>
+        
+		<!-- Start of Window content without header and footer -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>
+
+                <!--Dynamic Content 1-->
+                <div id="content-load">
+                    <!-- dynamic content load here -->
+			        <script type="text/javascript">
+			        	function success(data) {
+                            var container, sunlight;
+                            if(data.container == 1){
+                                container = "Contain Ability"
+                            } else{
+                                container = "Contain Inability"
+                            }
+                            if(data.sunlight == 1){
+                                sunlight = "High";
+                            } else if(data.sunlight == 2){
+                                sunlight = "Medium";
+                            } else{
+                                sunlight = "Low";
+                            }
+                            item = {};
+                            item['pH'] = data.pH;
+                            item['germDays'] = data.germDays+" days";
+                            item['disPlant'] = data.disPlant+" cm";
+                            item['pitDepth'] = data.pitDepth+" cm";
+                            item['disRow'] = data.disRow+" cm";
+                            item['waterDays'] = data.waterDays+" days";
+                            item['harvestDays'] = data.harvestDays+" days";
+                            item['seedBed'] = data.seedBed+" cm";
+                            item['sunlight'] = sunlight;
+                            item['plantImg'] = data.plantImg;
+                            item['container'] = container;
+                            item['plantType'] = "Vegetable";
+                            item['nameSin'] = data.translations[0].name;
+                            item['nameEng'] = data.translations[1].name;
+                            item['familySin'] = data.translations[0].family;
+                            item['familyEng'] = data.translations[1].family;
+                            item['climateSin'] = data.translations[0].climate;
+                            item['climateEng'] = data.translations[1].climate;
+                            item['soilSin'] = data.translations[0].soil;
+                            item['soilEng'] = data.translations[1].soil;
+                            item['harvestDesSin'] = data.translations[0].harvestDes;
+                            item['harvestDesEng'] = data.translations[1].harvestDes;
+                            item['waterDesSin'] = data.translations[0].waterDes;
+                            item['waterDesEng'] = data.translations[1].waterDes;
+                            item['makeGrndSin'] = data.translations[0].makeGrnd;
+                            item['makeGrndEng'] = data.translations[1].makeGrnd;
+			        		//console.log(data);
+			        		$('#content-load').loadTemplate("../templates/plantDesc-view-block.html", item, {append: true});
+			        	}
+			        	
+			        	function failed(data) {
+			        		console.log("failed");
+			        		console.log(data);
+			        	}
+			        	
+			        	getAPI("api/plants/"+plantID, {'0': 0}, success, failed);
+			        	
+                    </script>
+                </div>
+
+                <div class="col-12" style="text-align: right;">
+                    <button class="btn" onclick="deletePlantDesc(plantID)" style="background-color: red;">Remove</button>
+                    <button class="btn" onclick="openEditPlant(plantID)">Edit</button>
+                    <button class="btn" onclick="closePlantDesc()">Back</button>
+                </div>
+
+                <script type="text/javascript">
+			        
+                    function success(data) {
+                        window.open("admin_plant.html", "_self");
+                        console.log(data);
+                    }
+                    
+                    function failed(data) {
+                        console.log("failed");
+                        console.log(data);
+                    }
+                    
+                    function deletePlantDesc(palntID) {
+                        deleteAPI("api/plants", {'plantID': plantID}, success, failed);
+                    }
+                </script>
+
+                <div class="col-12"><div class="footer-height"></div></div>
+            </div>
+        </div> 
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>		      
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_admin.js"></script>
+    </body>
+</html>

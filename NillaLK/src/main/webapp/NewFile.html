@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	                <!--div class="col-12">
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Egg Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">No Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Spinich Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Leeks Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Potato Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Ladies Finger Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Beans Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Tomato Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Pumpkin Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Beet Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Carrot Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+						<div class="col-3 col-s-4">
+							<div class="border-imgtxt">
+								<img src="../img/placeholder.jpg" class="block-img">
+								<h4 class="shop-item-title">Chilli Plant</h4>
+								<button class="shop-item-button" onclick="addItemToCart(title)"> Add</button>
+							</div>
+						</div>
+	                </div-->
+		<script>
+			if (document.readyState == 'loading') {
+			    document.addEventListener('DOMContentLoaded', ready)
+			    console.log("1")
+			} else {
+				console.log("2")
+			    ready()
+			}
+
+			function ready() {
+				console.log("3")
+			    var addToCartButtons = document.getElementsByClassName('shop-item-button')
+			    for (var i = 0; i < addToCartButtons.length; i++) {
+			        var button = addToCartButtons[i]
+			        button.addEventListener('click', addToCartClicked)
+			    }
+			}
+			
+			function addToCartClicked(event) {
+			    var button = event.target
+			    var shopItem = button.parentElement.parentElement
+			    var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
+			    console.log(title)
+			    addItemToCart(title)
+			}			
+			function addItemToCart(title) {
+			    var cartRow = document.createElement('div')
+			    cartRow.innerText = title
+			    var cartItems = document.getElementsByClassName('cart-items')[0]
+			    cartItems.append(cartRow)
+			}
+			</script>
+
+</body>
+</html>

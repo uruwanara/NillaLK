@@ -1,0 +1,252 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+		<link rel="stylesheet" type="text/css" href="../css/file-upload.css">
+        <title>Admin Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- markup library -->
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+	
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('Admin');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+		<script>
+	    	const query = window.location.search;
+	    	const urlParameter = new URLSearchParams(query);
+	    	const articleID = urlParameter.get('articleID');		
+		</script>
+    </head>
+    <body>
+        <!-- Header of Page -->
+        <div class="header" id="header">
+            <div class="row">
+                <div class="content-line">
+                    <img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">        
+                    <img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Create Article</h3>
+                </div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-AdminName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+            </div>
+        </div>
+
+        <!-- Side Menu of Page -->
+        <div id="userSidebar" class="sidebar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin_userView.html">Users</a>
+            <a href="request.html">User Requests</a>
+            <a href="admin_plant.html">Plants</a>
+            <a href="admin_pests.html">Pests</a>
+            <a href="admin_blog.html">Blog</a>
+            <a href="admin_addAgriOfficer.html">Add Agricultural Officers</a>
+            <a href="assignZonal.html">Assign Zonal Department Head</a>
+            <a href="admin_advertise.html">Advertisement</a>
+        </div>
+		
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>
+                <!--Dynamic Content 1-->
+                <div id="content-load-1">
+                    <!-- dynamic content load here -->
+			        <script type="text/javascript">
+			        
+			        	function success(data) {
+			        		//console.log(data);
+			        		var article = data.articleDesc;
+			        		localStorage.setItem("article", JSON.stringify(article));
+			        		$('#content-load-1').loadTemplate("../templates/article-edit-block.html", data, {append: true});
+			        	}
+			        	
+			        	function failed(data) {
+			        		console.log("failed");
+			        		console.log(data);
+			        	}
+			        	
+			        	getAPI("api/articles/"+articleID, {'0': 0}, success, failed);
+			        	
+                    </script>
+                </div>
+                
+                <div class="col-12" style="text-align: right;">
+ 	            	<button class="btn" onclick="editArticle(articleID)">Edit</button>
+					<button class="btn" onclick="deleteArticle(articleID)" style="background-color: red;">Delete</button>
+                    <button class="btn" onclick="closeViewArticle()">Back</button>
+                </div>
+                
+                    <script type="text/javascript">
+                        function creatingArticleSuccess(data) {
+                            window.open("admin_blog.html", "_self");
+                        }
+                            
+                        function creatingArticleFailed(data) {
+                            /* TODO: Show error*/
+                            var alert = document.getElementById('divalert');
+                            alert.style.visibility = 'visible';
+                            alert.innerHTML = data['reason'];
+                        }
+                        
+                        function editArticle(articleID) {
+                                
+                            console.log("updating article...");
+                            //e.preventDefault();
+            
+                            // TODO check before submiting
+                            var articleTitle = $('#articleTitle').val();
+                            var articleDesc = $('#articleDesc').val();
+                            var articleImg = localStorage.getItem("Image");
+                            
+                            item = {};
+                            item['articleID'] = articleID;
+                            item['articleTitle'] = articleTitle;
+                            item['articleDesc'] = articleDesc;
+                            item['articleState'] = "Published";
+                            item['articleImg'] = articleImg;
+                            jsonString = JSON.stringify(item);
+                            
+                            putAPI("api/articles", {}, jsonString, creatingArticleSuccess, creatingArticleFailed);
+                        }
+                    </script>
+                    
+			        <script type="text/javascript">
+			        
+			        	function successDel(data) {
+			        		window.open("admin_blogUser.html", "_self");
+			        		//console.log(data);
+			        	}
+			        	
+			        	function failedDel(data) {
+			        		console.log("failed");
+			        		console.log(data);
+			        	}
+			        	
+			        	function deleteArticle(articleID) {
+				        	deleteAPI("api/articles/"+articleID, {'userID': getUserID}, successDel, failedDel);			        		
+			        	}
+			        	
+                    </script>
+
+                <h2>Comments...</h2>
+                <div class="col-12 textData">
+                	<form id="createComment">
+	                	<div class="col-1" style="text-align: right;">
+	                    	<img src="../img/icon/user.png" width="50%">                	
+	                	</div>
+	                	<div class="col-11">
+							<input class="col-12 textData" name="comment" id="comment" style="font-size: small;" type="text" placeholder="Enter your comment" required>
+	                	</div>
+	                	<div style="text-align: right;">
+	                    	<input type="submit" class="btn btn-s" value="Comment">
+	                    	<button class="btn btn-s" onclick="">Clear</button>
+	                    </div>
+                    </form>
+                    
+					<script>
+						function creatingCommentSuccess(data) {
+							window.open("admin_blog.html", "_self");
+				       	}
+				        	
+						function creatingCommentFailed(data) {
+							/* TODO: Show error*/
+							var alert = document.getElementById('divalert');
+							alert.style.visibility = 'visible';
+							alert.innerHTML = data['reason'];
+				       	}
+						
+						$("#createComment").submit(function(e) {
+								
+							console.log("creating comment...");
+							e.preventDefault();
+			
+							// TODO check before submiting
+							var comment = $('#comment').val();
+				       		
+				       		item = {};
+				       		item['comment'] = comment;
+				       		item['articleID'] = articleID;
+				       		jsonString = JSON.stringify(item);
+				       		
+				       		postAPI("api/comments", {}, jsonString, creatingCommentSuccess, creatingCommentFailed);
+							
+						});		
+					</script>
+
+                </div>
+                    
+                <div id="content-load-2">
+                                    
+                    <script type="text/javascript">
+                    
+                    	function success(data) {
+			        		$('#content-load-2').loadTemplate("../templates/comment-view-block.html", data, {append: true});                    		
+                    	}
+                    	
+                    	function failed(data) {
+                    		$('#content-load-2').loadTemplate("../templates/no-comment-view-block.html", data, {append: true}); 
+                    		console.log("failed");
+                    		console.log(data);
+                    	}
+                    	
+                    	getAPI("api/comments", {'articleID': articleID}, success, failed);
+                    	
+                    </script>
+                    
+                </div>
+                <div class="col-12"><div class="footer-height"></div></div>
+            </div>
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+		<script type="text/javascript" src="../js/logout.js"></script>	        
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_admin.js"></script>
+    </body>
+</html>

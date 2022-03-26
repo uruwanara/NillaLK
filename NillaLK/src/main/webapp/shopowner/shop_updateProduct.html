@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link rel="stylesheet" type="text/css" href="../css/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/img.css">
+	    <link rel="stylesheet" type="text/css" href="../css/button.css">
+	    <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+	    <link rel="stylesheet" type="text/css" href="../css/font.css">
+	    <link rel="stylesheet" type="text/css" href="../css/header.css">
+	    <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+	    <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+	    <link rel="stylesheet" type="text/css" href="../css/content.css">
+		<link rel="stylesheet" type="text/css" href="../css/file-upload.css">	
+	    <title>Shop Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('ShopOwner');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+		<script>
+			const query = window.location.search;
+			const urlParameter = new URLSearchParams(query);
+			const shopID = urlParameter.get('shopID');
+		</script>
+	</head>
+
+	<body>
+		<!-- Header of Page -->
+		<div class="header" id="header">
+			<div class="row">
+				<div class="content-line">
+					<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+					<img src="../img/logo_green.png" class="logo-header">
+					<h3 class="header-title">Request New Item</h3>
+				</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-ShopOwnerName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>
+	            </div>
+	        </div>
+		</div>
+		
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>
+		    <a href="shop_updateProduct.html">Update Products</a>
+		    <a href="shop_addNewProduct.html">Add New Products</a>
+		    <a href="shop_reqNewItem.html">New Item Requests</a>
+			<a href="shop_reqPrioritize.html">Priorities Requests</a>
+			<a href="shopAddNewShop.html">Add New Shop</a>
+		</div>
+
+		<div id="content">
+			<!-- Start of Window content without header and footer -->
+			<div class="center">
+				<div class="col-12"><div class="header-height"></div></div>
+
+	            <!--Select Shop-->
+				<div class="col-12">
+					<div class="col-8 col-s-6">
+						<div class="block-search block-s-search">
+							<input class="textInput textInput-s" type="text" placeholder="Search for Products">
+							<button class="btn-search btn-s-search">Search</button>
+						</div>
+					</div>
+					<div class="col-4">
+
+					</div>
+				</div>
+	            <div class="col-12 col-s-12">
+					<!--Dynamic Content 1-->
+					<div id="content-load-2">
+						<!-- dynamic content load here -->
+						<script type="text/javascript">
+						
+							function success(data) {
+								for (i = 0; i < data.length; i++) {
+									getAPI("api/products/"+data[i].productID, null, success1, failed1);
+									item = {};
+	//								item['productImg'] = data[i].productImg;
+									item['productExp'] = data[i].productExp;
+									item['productPrice'] = "Rs. "+data[i].productPrice+".00";
+									function success1(data1){
+										//console.log(data1);
+										item['productName'] = data1.translations[0].productName;
+										$('#content-load-2').loadTemplate("../templates/productShop2-view-block.html", item, {append: true});
+									}
+									function failed1(data1) {
+										console.log("failed");
+										console.log(data1);
+									}
+								}
+							}
+							
+							function failed(data) {
+								console.log("failed");
+								console.log(data);
+							}
+							
+							getAPI("api/shopproducts", {"shopID": shopID}, success, failed);
+							
+						</script>
+					</div>
+					<!--div class="col-6 border" style="margin-bottom: 5px;">
+	                    <div class="col-4">
+	                        <img src="../img/placeholder.jpg" height="100px" style="padding-right: 10px;">
+	                    </div>
+	                    <div class="col-4" style="text-align: left;">
+	                        <h2>Egg Plant</h2>
+	                        <p>T56 - 2 weeks old plants in good condition </p>
+	                        <h3>45</h3>
+	                    </div>
+						<div class="col-4">
+							<div class="col-12">
+								<button class="btn" style="background-color: red;">Remove</button>
+							</div>
+							<div class="col-12">
+								<button class="btn">Update</button>
+							</div>	
+						</div>
+					</div>
+	                <div class="col-6 border" style="margin-bottom: 5px;">
+	                    <div class="col-4">
+	                        <img src="../img/placeholder.jpg" height="100px" style="padding-right: 10px;">
+	                    </div>
+	                    <div class="col-4" style="text-align: left;">
+	                        <h2>Egg Plant</h2>
+	                        <p>T56 - 2 weeks old plants in good condition </p>
+	                        <h3>45</h3>
+	                    </div>
+						<div class="col-4">
+							<div class="col-12">
+								<button class="btn" style="background-color: red;">Remove</button>
+							</div>
+							<div class="col-12">
+								<button class="btn">Update</button>
+							</div>	
+						</div>
+					</div-->
+				</div>
+
+                <div class="popup-2" id="updateShopProduct">
+                    <div class="col-12" style="text-align: right">
+                        <input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closeUpdateShopProduct()">
+                    </div>
+					<form id="addShopProduct">
+						<div class="col-12">
+							<label for="productExp">Description</label><br>
+						    <input class="col-12" type="text" id="productExp" name="productExp" required>
+						</div>
+						<div class="col-12 content-line">
+							<label for="productPrice">Rs.</label>
+						    <input type="text" id="productPrice" name="productPrice" required>
+						</div>
+						<div class="col-12">
+							<input class="btn" type="submit">
+						</div>	
+					</form>
+					<script>
+						function addingSuccess(data) {
+							openAddNewProduct(shopID);
+						}
+							
+						function addingFailed(data) {
+							/* TODO: Show error*/
+							var alert = document.getElementById('divalert');
+							alert.style.visibility = 'visible';
+							alert.innerHTML = data['reason'];
+						}
+						
+						$("#updateShopProduct").submit(function(e) {
+							var productID = localStorage.getItem("productID");
+								
+							console.log("creating shop product...");
+							e.preventDefault();
+			
+							// TODO check before submiting
+							var productPrice = $('#productPrice').val();
+							var productExp = $('#productExp').val();
+							//var articleImg = $('#articleImg').val();
+							
+							item = {};
+							item['productPrice'] = productPrice;
+							item['productExp'] = productExp;
+							//item['productState'] = "InStock";
+							item['productID'] = productID;
+							item['shopID'] = shopID;
+							console.log(item);
+							jsonString = JSON.stringify(item);
+							
+							postAPI("api/shopproducts", {}, jsonString, addingSuccess, addingFailed);
+							
+						});
+					</script>
+                </div>
+
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div>
+
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+        <script type="text/javascript" src="../js/logout.js"></script>
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_shop.js"></script>
+    </body>
+</html>

@@ -1,0 +1,335 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/img.css">
+    <link rel="stylesheet" type="text/css" href="css/button.css">
+    <link rel="stylesheet" type="text/css" href="css/textArea.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="css/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/content.css">
+    <link rel="stylesheet" type="text/css" href="css/textArea.css">
+
+    <title>Home | Agriculture Department Head</title>
+</head>
+
+<body>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- custom libraries -->
+    <script type="text/javascript" src="js/dynamic-methods.js"></script>
+    <script type="text/javascript" src="js/jquery.loadTemplate.js"></script>
+
+    <!-- load content on load -->
+    <script>
+        $(document).ready(function () {
+            loadContent();
+        });  
+    </script>
+
+    <!-- Header of Page -->
+    <div class="header" id="header">
+        <div class="row">
+            <div class="content-line">
+                <img src="img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+                <img src="img/logo_green.png" class="logo-header">
+                <h3 style="color: #92d034; padding-top: 20px;padding-left: 50px;">Agriculture Department Head</h3>
+            </div>
+            <div class="content-header content-line">
+
+                <h4 style="padding-top: 20px;"> Saman Kumara </h4>
+                <!-- Drop down menu of header -->
+                <div class="dropdown">
+                    <img src="img/icon//user.png" class="img-header userdropbtn" onclick="showDropDown()">
+                    <div id="userDropdown" class="user-dropdown-content">
+                        <a href="">Manage Your Account</a>
+                        <a href="">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Menu of Page -->
+    <div id="userSidebar" class="sidebar">
+        <a href="user_dashboard.html">Masseges</a>
+        <a href="user_plant.html">Plants</a>
+        <a href="user_shop.html">Blog</a>
+    </div>
+
+    <!-- Start of Window content without header and footer -->
+    <div id="content">
+        <div class="center">
+            <div class="col-4 col-s-2 header-height" style="padding-bottom: 150px;">
+                <h4 style="color:#92d034">Agriculture Officers</h4>
+                <input class="textInput textInput-s" type="text" placeholder="Search For Agriculture Officer">
+                <button class="btn-search btn-s-search">Search</button>
+
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+                <div class="block-agriOfficer">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style=" padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="padding-left: 75px;padding-top: 0px; color:gray"> ID: 9722001458V | Assigned Date:
+                            10-11-2020 </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="center">
+                <div class="col-8 col-s-2 header-height" style="padding-bottom: 150px; padding-left: 20px;">
+                    <h3 style="color:#92d034">Galle Division</h3>
+                    <input class="textInput textInput-s" type="text" placeholder="Search For Areas">
+                    <button class="btn-search btn-s-search">Search</button>
+
+
+                    <div class="block-agriOfficer" style="padding-top:5px; margin-top: 12px;">
+                        <div class="col-1" style="padding-left: 20px;">
+                            <img src="img/icon//location.png" style="height: 35px; padding-left: 15px; ">
+                            <label style=" padding-top: 10px; padding-bottom: 0px; font-weight: bold;">Wackwella</label>
+
+                        </div>
+                        <div class="col-1" style="padding-left: 70px;">
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">Sampath Weragoda</label>
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">972232475V</label>
+                        </div>
+                        <div class="col-1" style="margin-left: 100px;">
+                            <label style="padding-top: 10px; float: inherit;" ">Assigned: 21/11/2020</label>
+                        </div>
+                        <div class=" col-1" style="padding-top: 5px; padding-left:  45px;">
+                                <button class="btn-remove"
+                                    style="padding-top: 10px; font-size: x-small;">Remove</button>
+                        </div>
+                        <div class="col-2 " style="margin-left: 100px;"">
+                            <input class=" textInput" type="text" placeholder="Search For officer"
+                            style="font-size: xx-small;">
+                        </div>
+                        <div class="col-2" style="padding-left: 50px;">
+                            <button class="btn-search" style="width:auto">Assign</button>
+                        </div>
+                    </div>
+                    
+                    <div class="block-agriOfficer" style="padding-top:5px; margin-top: 12px;">
+                        <div class="col-1" style="padding-left: 20px;">
+                            <img src="img/icon//location.png" style="height: 35px; padding-left: 15px; ">
+                            <label style=" padding-top: 10px; padding-bottom: 0px; font-weight: bold;">Hapugala</label>
+
+                        </div>
+                        <div class="col-1" style="padding-left: 70px;">
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">Sampath Weragoda</label>
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">972232475V</label>
+                        </div>
+                        <div class="col-1" style="margin-left: 100px;">
+                            <label style="padding-top: 10px; float: inherit;" ">Assigned: 21/11/2020</label>
+                        </div>
+                        <div class=" col-1" style="padding-top: 5px; padding-left:  45px;">
+                                <button class="btn-remove"
+                                    style="padding-top: 10px; font-size: x-small;">Remove</button>
+                        </div>
+                        <div class="col-2 " style="margin-left: 100px;"">
+                            <input class=" textInput" type="text" placeholder="Search For officer"
+                            style="font-size: xx-small;">
+                        </div>
+                        <div class="col-2" style="padding-left: 50px;">
+                            <button class="btn-search" style="width:auto">Assign</button>
+                        </div>
+                    </div>
+                    
+                    <div class="block-agriOfficer" style="padding-top:5px; margin-top: 12px;">
+                        <div class="col-1" style="padding-left: 20px;">
+                            <img src="img/icon//location.png" style="height: 35px; padding-left: 15px; ">
+                            <label style=" padding-top: 10px; padding-bottom: 0px; font-weight: bold;">Karapitiya</label>
+
+                        </div>
+                        <div class="col-1" style="padding-left: 70px;">
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">Sampath Weragoda</label>
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">972232475V</label>
+                        </div>
+                        <div class="col-1" style="margin-left: 100px;">
+                            <label style="padding-top: 10px; float: inherit;" ">Assigned: 21/11/2020</label>
+                        </div>
+                        <div class=" col-1" style="padding-top: 5px; padding-left:  45px;">
+                                <button class="btn-remove"
+                                    style="padding-top: 10px; font-size: x-small;">Remove</button>
+                        </div>
+                        <div class="col-2 " style="margin-left: 100px;"">
+                            <input class=" textInput" type="text" placeholder="Search For officer"
+                            style="font-size: xx-small;">
+                        </div>
+                        <div class="col-2" style="padding-left: 50px;">
+                            <button class="btn-search" style="width:auto">Assign</button>
+                        </div>
+                    </div>
+                    
+                    <div class="block-agriOfficer" style="padding-top:5px; margin-top: 12px;">
+                        <div class="col-1" style="padding-left: 20px;">
+                            <img src="img/icon//location.png" style="height: 35px; padding-left: 15px; ">
+                            <label style=" padding-top: 10px; padding-bottom: 0px; font-weight: bold;">Kalegana</label>
+
+                        </div>
+                        <div class="col-1" style="padding-left: 70px;">
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">Sampath Weragoda</label>
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">972232475V</label>
+                        </div>
+                        <div class="col-1" style="margin-left: 100px;">
+                            <label style="padding-top: 10px; float: inherit;" ">Assigned: 21/11/2020</label>
+                        </div>
+                        <div class=" col-1" style="padding-top: 5px; padding-left:  45px;">
+                                <button class="btn-remove"
+                                    style="padding-top: 10px; font-size: x-small;">Remove</button>
+                        </div>
+                        <div class="col-2 " style="margin-left: 100px;"">
+                            <input class=" textInput" type="text" placeholder="Search For officer"
+                            style="font-size: xx-small;">
+                        </div>
+                        <div class="col-2" style="padding-left: 50px;">
+                            <button class="btn-search" style="width:auto">Assign</button>
+                        </div>
+                    </div>
+                    
+                    <div class="block-agriOfficer" style="padding-top:5px; margin-top: 12px;">
+                        <div class="col-1" style="padding-left: 20px;">
+                            <img src="img/icon//location.png" style="height: 35px; padding-left: 15px; ">
+                            <label style=" padding-top: 10px; padding-bottom: 0px; font-weight: bold;">Baddegama</label>
+
+                        </div>
+                        <div class="col-1" style="padding-left: 70px;">
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">Sampath Weragoda</label>
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">972232475V</label>
+                        </div>
+                        <div class="col-1" style="margin-left: 100px;">
+                            <label style="padding-top: 10px; float: inherit;" ">Assigned: 21/11/2020</label>
+                        </div>
+                        <div class=" col-1" style="padding-top: 5px; padding-left:  45px;">
+                                <button class="btn-remove"
+                                    style="padding-top: 10px; font-size: x-small;">Remove</button>
+                        </div>
+                        <div class="col-2 " style="margin-left: 100px;"">
+                            <input class=" textInput" type="text" placeholder="Search For officer"
+                            style="font-size: xx-small;">
+                        </div>
+                        <div class="col-2" style="padding-left: 50px;">
+                            <button class="btn-search" style="width:auto">Assign</button>
+                        </div>
+                    </div>
+                    
+                    <div class="block-agriOfficer" style="padding-top:5px; margin-top: 12px;">
+                        <div class="col-1" style="padding-left: 20px;">
+                            <img src="img/icon//location.png" style="height: 35px; padding-left: 15px; ">
+                            <label style=" padding-top: 10px; padding-bottom: 0px; font-weight: bold;">Gonapinuwala</label>
+
+                        </div>
+                        <div class="col-1" style="padding-left: 70px;">
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">Sampath Weragoda</label>
+                            <label style=" padding-top: 10px; padding-bottom: 0px;">972232475V</label>
+                        </div>
+                        <div class="col-1" style="margin-left: 100px;">
+                            <label style="padding-top: 10px; float: inherit;" ">Assigned: 21/11/2020</label>
+                        </div>
+                        <div class=" col-1" style="padding-top: 5px; padding-left:  45px;">
+                                <button class="btn-remove"
+                                    style="padding-top: 10px; font-size: x-small;">Remove</button>
+                        </div>
+                        <div class="col-2 " style="margin-left: 100px;"">
+                            <input class=" textInput" type="text" placeholder="Search For officer"
+                            style="font-size: xx-small;">
+                        </div>
+                        <div class="col-2" style="padding-left: 50px;">
+                            <button class="btn-search" style="width:auto">Assign</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+            <script type="text/javascript" src="js/header.js"></script>
+            <script type="text/javascript" src="js/dashboard_User.js"></script>
+</body>
+
+<footer>
+    <div class="footer">
+        <div>
+            <p
+                style="color: rgb(255, 255, 255); text-align:center ; font-family: Arial, Helvetica, sans-serif; padding-bottom: 10px; ">
+                All Right
+                Reserved @ Nilla.lk 2020-2021</p>
+        </div>
+    </div>
+</footer>
+
+
+
+</html>

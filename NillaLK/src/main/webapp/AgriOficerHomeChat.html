@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/img.css">
+    <link rel="stylesheet" type="text/css" href="css/button.css">
+    <link rel="stylesheet" type="text/css" href="css/textArea.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="css/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/content.css">
+    <link rel="stylesheet" type="text/css" href="css/textArea.css">
+
+    <title>Home</title>
+</head>
+
+<body>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- custom libraries -->
+    <script type="text/javascript" src="js/dynamic-methods.js"></script>
+    <script type="text/javascript" src="js/jquery.loadTemplate.js"></script>
+
+    <!-- load content on load -->
+    <script>
+        $(document).ready(function () {
+            loadContent();
+        });  
+    </script>
+
+    <!-- Header of Page -->
+    <div class="header" id="header">
+        <div class="row">
+            <div class="content-line">
+                <img src="img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+                <img src="img/logo_green.png" class="logo-header">
+                <h3 style="color: #92d034; padding-top: 20px;padding-left: 50px;">Agriculture Officer Home/Chat</h3>
+            </div>
+            <div class="content-header content-line">
+
+                <h4 style="padding-top: 20px;"> Saman Kumara </h4>
+                <!-- Drop down menu of header -->
+                <div class="dropdown">
+                    <img src="img/icon//user.png" class="img-header userdropbtn" onclick="showDropDown()">
+                    <div id="userDropdown" class="user-dropdown-content">
+                        <a href="">Manage Your Account</a>
+                        <a href="">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Menu of Page -->
+    <div id="userSidebar" class="sidebar">
+        <a href="user_dashboard.html">Masseges</a>
+        <a href="user_plant.html">Plants</a>
+        <a href="user_shop.html">Blog</a>
+    </div>
+
+    <!-- Start of Window content without header and footer -->
+    <div id="content">
+        <div class="center">
+            <div class="col-6 col-s-2 header-height" style="padding-bottom: 100px;">
+                <h4 style="color:#92d034">Messeges</h4>
+                <input class="textInput textInput-s" type="text" placeholder="Enter Gardeners Name">
+                <button class="btn-search btn-s-search">Search</button>
+
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Kamal Sahabandu</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Dasun Madushan</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;">  Amal Perea</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+                <div class="block-chat-parti">
+                    <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wambatu gahe kola
+                            kunu wela. mokakda karanna ine</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-6 col-s-2 header-height">
+            <div class="block-chat-messeges">
+                <div>
+                        <img src="img/icon//user.png" style="float: left; height: 35px; padding-left: 10px;">
+                        <p style="text-align: left; padding-left: 75px; padding-bottom: 0px; font-weight: bold;"> Nimal
+                            Perera</p>
+                        <p style="text-align: left; padding-left: 75px;padding-top: 0px; color:gray"> Wackwella Division, Galle</p>
+                        <br>
+
+                        <p> Sample Chat window
+                    
+                    </div>
+            </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="js/dashboard_User.js"></script>
+</body>
+
+<footer>
+    <div class="footer">
+        <div>
+            <p
+                style="color: rgb(255, 255, 255); text-align:center ; font-family: Arial, Helvetica, sans-serif; padding-bottom: 10px; ">
+                All Right
+                Reserved @ Nilla.lk 2020-2021</p>
+        </div>
+    </div>
+</footer>
+
+
+
+</html>

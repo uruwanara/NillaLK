@@ -1,0 +1,22 @@
+<script>
+	$("button").click(function(){
+		var productID = $(this).val();
+		openAddProduct(productID);
+	});
+</script>
+
+<div class="col-3">
+	<div class="col-3 border-imgtxt">
+		<div class="col-12">
+			<img src="../img/placeholder.jpg" class="block-img">
+			<!--img data-src="productImg" class="block-img"-->
+		</div>
+		<div class="col-12" style="text-align: center;">
+			<h3 data-content="productNameSin"></h3>
+			<h3 data-content="productNameEng"></h3>
+		</div>
+		<div>
+			<button class="btn" data-value="productID">View</button>
+		</div>			
+	</div>
+</div>

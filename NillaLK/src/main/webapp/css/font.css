@@ -1,0 +1,50 @@
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+/*Alignment of content in division*/
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.text-left {
+    text-align: left;
+}
+
+.font-index {
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+.font-login {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: black;
+}
+
+.font-label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+	h1{
+		font-size: 25px;
+	}
+	h2{
+		font-size: 16px;
+	}
+	h3{
+		font-size: 16px;
+	}
+    .font-label {
+        margin: 0px;
+        text-align: left;
+        font-size: 14px;
+        padding: 8px 0px 8px 5px;
+    }
+}

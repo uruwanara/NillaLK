@@ -1,0 +1,186 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <link rel="stylesheet" type="text/css" href="../css/messaging.css">
+        <link rel="stylesheet" type="text/css" href="../css/file-upload.css">
+        <title>Gardener Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('Gardener');
+			
+			//must have in every page
+			$(window).on('load', function() {
+				document.body.style.display = "block";
+			});
+		</script>
+	
+    </head>
+    <body>
+		<!-- Header of Home Page -->
+		<div class="header" id="header">
+			<div class="row">
+				<div class="content-line">
+					<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">  
+				  	<img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Messages</h3>       
+				</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-UserName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+			</div>
+		</div>
+
+		<!-- Side Menu of Page -->
+		<div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>
+			<a href="user_plant.html">View Plant Details</a>
+			<a href="user_shop.html">View Nearby Shops</a>
+			<a href="user_agri.html">Contact Agricultural Instructor</a>
+			<a href="user_blog.html">Blog</a>
+			<a href="user_monitorPlant.html">Monitor Plants</a>
+		</div>
+		
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+				<div class="col-12"><div class="header-height"></div></div>
+
+		<!-- Content -->
+		<div id="content" class="pl-2">
+			<div class="col-12"><div style="height: 43px"></div></div>
+			<div id="channel-content" class="col-3 pl-2 channel-container">
+				<div style="height: 10px"></div>
+			</div>
+			<div class="col-9 pl-1">
+				<div id="message-content" class="message-container"></div>
+				<div style="background-color: #F9F9F9; height: 14vh">
+					<div id="chatbox" class="chat-wrappper" style="visibility: hidden;">
+						<div class="flex" style="margin: 10px">
+							<button id="button-upload" class="button-rounded chat-upload flex">
+								<svg class="svg" width="32" height="32" viewBox="0 0 16 16">
+									<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+								</svg>
+							</button>
+						</div>
+						<textarea id="chat-input" class="chat-text" name="message-text" maxlength="3000" placeholder="Message"/></textarea>
+						<div class="flex" style="margin: 10px">
+							<button id="button-send" class="button-rounded chat-send flex" disabled="disabled">
+								<svg class="svg" width="32" height="32" viewBox="0 0 16 16">
+									<path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+								</svg>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div>        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+		<!-- Templates -->
+		
+		<script type="text/html" id="template-message">
+			<div data-class="type" data-id="id">
+				<div style="min-width: 20px; max-width: 20px;"></div>
+				<div class="bubble">
+					<div class="flex">
+						<img class="avatar" data-src="imgUrl">
+					</div>
+					<div style="min-width: 2rem; max-width: 2rem;"></div>
+					<div>
+						<div class="msgtag">
+							<div data-content="name" style="font-size: small; font-weight: 600;"></div>
+							<div style="width: 10px"></div>
+							<div data-content="time" style="font-size: xx-small; color: gray; align-self: center;"></div>
+						</div>
+						<p data-content="text" style="text-align: justify;"></p>
+					</div>
+				</div>
+				<div style="min-width: 20rem;"></div>
+			</div>
+		</script>
+		
+		<script type="text/html" id="template-message-img">
+			<div data-class="type" data-id="id">
+				<div style="min-width: 20px; max-width: 20px;"></div>
+				<div class="bubble">
+					<div class="flex">
+						<img class="avatar" data-src="imgUrl">
+					</div>
+					<div style="min-width: 2rem; max-width: 2rem;"></div>
+					<div>
+						<div class="msgtag">
+							<div data-content="name" style="font-size: small; font-weight: 600;"></div>
+							<div style="width: 10px"></div>
+							<div data-content="time" style="font-size: xx-small; color: gray; align-self: center;"></div>
+						</div>
+						<img class="msg-img-preview" data-src="preImgUrl">
+					</div>
+				</div>
+				<div style="min-width: 20rem;"></div>
+			</div>
+		</script>
+		
+		<script type="text/html" id="template-channel">
+			<div data-id="id" class="col-12 channel mb-1" onclick="loadMessages(this.id)">
+				<div class="col-2">
+					<img class="avatar" data-src="imgUrl">                        
+				</div>
+				<div style="min-width: 2rem; max-width: 2rem;"></div>
+				<div class="col-10" style="margin-top: 10px;">
+					<h3 data-content="name"></h3>
+				</div>
+			<!-- 	<hr class="solid"> -->
+			</div>
+		</script>
+
+        <script type="text/javascript" src="/js/logout.js"></script> 
+        <script type="text/javascript" src="/js/header.js"></script>
+		<script type="text/javascript" src="/js/dashboard_User.js"></script>
+		<script type="text/javascript" src="/js/messaging.js"></script>
+		<script type="text/javascript" src="/js/moment.min.js"></script>
+    </body>
+</html>

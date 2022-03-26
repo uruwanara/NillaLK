@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+
+  <threadsafe>true</threadsafe>
+  <sessions-enabled>false</sessions-enabled>
+  <runtime>java8</runtime>
+
+  <system-properties>
+    <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+  </system-properties>
+  <env-variables>
+  	<env-var name="JWSSigningKey" value="IgFHnZ/uMbrwXUTinkV1IT23zQv6zlOgQkREE+U530Y=">env-var</env-var>
+  	
+  	<env-var name="SMTPUsername" value="projectnilla@gmail.com">env-var</env-var><env-var name="SMTPPassword" value="f!GJJqCsb5&amp;$9wH2">env-var</env-var><env-var name="KeyStorePassword" value="LSDkK4@eeUTUMqJX">env-var</env-var>
+  	<env-var name="CloudBucket" value="nillalk.appspot.com">env-var</env-var>
+  </env-variables>
+
+</appengine-web-app>

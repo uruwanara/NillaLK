@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link rel="stylesheet" type="text/css" href="../css/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/img.css">
+	    <link rel="stylesheet" type="text/css" href="../css/button.css">
+	    <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+	    <link rel="stylesheet" type="text/css" href="../css/font.css">
+	    <link rel="stylesheet" type="text/css" href="../css/header.css">
+	    <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+	    <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+	    <link rel="stylesheet" type="text/css" href="../css/content.css">	
+	    <title>Shop Owner Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('ShopOwner');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+			    
+	</head>
+
+	<body>
+	    <!-- Header of Page -->
+			<div class="header" id="header">
+	        	<div class="row">
+	            	<div class="content-line">
+	                	<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+	                	<img src="../img/logo_green.png" class="logo-header">
+	                	<h3 class="header-title">Shop Dashboard</h3>
+	            	</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-ShopOwnerName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+	            </div>
+	        </div>
+	        
+		    <!-- Side Menu of Page -->
+		    <div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>          
+		        <a href="shop_updateProduct.html">Update Products</a>
+		        <a href="shop_addNewProduct.html">Add New Products</a>
+		        <a href="shop_reqNewItem.html">New Item Requests</a>
+		        <a href="shop_reqPrioritize.html">Priorities Requests</a>
+		    </div>
+
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+			<div class="center">
+				<div class="col-12"><div class="header-height"></div></div>
+
+				<form id="add-newShop">
+					<div class="col-12">
+						<div class="col-2 col-s-3">
+							<h3 style="padding-top: 10px;">Shop Name</h3>
+						</div>
+						<div class="col-10 col-s-6">
+							<input class="textData " type="text" id="shopName" placeholder="Enter  the Name">
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="col-2 col-s-3">
+							<h3 style="padding-top: 10px;">Address</h3>
+						</div>
+						<div class="col-10 col-s-6">
+							<div class="col-6"><input class="textData" type="text" id="addLine1" placeholder="Address line 1"></div>
+							<div class="col-6"><input class="textData" type="text" id="addLine2" placeholder="Address line 2"></div>
+							<div class="col-6"><input class="textData" type="text" id="city" placeholder="City"></div>
+							<div class="col-6"><input class="textData" type="text" id="district" placeholder="District"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 col-s-3">
+							<h3 style="padding-top: 10px;">Location</h3>
+						</div>
+						<div class="col-10 col-s-6">
+							<input class="textData " type="text" id="shopLocation" placeholder="URL">
+						</div>
+					</div>
+					<button class="col-12 btn" name="shopImg" id="shopImg" onclick="openUploadImg()">Upload Shop Image</button>
+
+				</form>
+				
+				<script>
+					function creatingShopSuccess(data) {
+						var shopID = data.shopID;
+						creatingRegistrationRequest(shopID);
+		        	}
+					function creatingShopFailed(data) {
+						/* TODO: Show error*/
+						var alert = document.getElementById('divalert');
+						alert.style.visibility = 'visible';
+						alert.innerHTML = data['reason'];
+		        	}
+					$("#add-newShop").submit(function(e) {
+						
+						console.log("creating shop...");
+						e.preventDefault();
+	
+						// TODO check before submiting
+						var shopName = $('#shopName').val();
+		        		var shopLocation = $('#shopLocation').val();
+						var shopImg = sanitize("https://media-cdn.tripadvisor.com/media/photo-s/06/17/c7/3f/item-shop.jpg");
+						var addLine1 = sanitize($('#addLine1').val());
+						var addLine2 = sanitize($('#addLine2').val());
+						var city = sanitize($('#city').val());
+						var district = sanitize($('#district').val());	
+						
+						addressItem = {};
+						addressItem['addLine1'] = addLine1;
+						addressItem['addLine2'] = addLine2;
+						addressItem['city'] = city;
+						addressItem['district'] = district;						
+						
+		        		item = {};
+		        		item['shopName'] = shopName;
+		        		item['shopLocation'] = shopLocation;
+		        		item['shopImg'] = shopImg;
+		        		item['address'] = addressItem;
+		        		item['shopState'] = "InReview";
+		        		jsonString = JSON.stringify(item);	
+		        		postAPI("api/shops", {}, jsonString, creatingShopSuccess, creatingShopFailed);
+					});
+				</script>
+
+		        <!-- Pop up window for update Request Table-->
+				<div class="popup-3" id="updateRequest">
+					<form id="remove-regShop">
+			      		<div class="col-12" style="text-align: right">
+			            	<input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closeChooseUserType()">
+			            </div>
+		            </form>
+		            
+					<script>
+						function Success(data){
+							console.log(data)
+						}
+	
+						function Failed(data){
+							var alert = document.getElementById('divalert');
+							alert.style.visibility = 'visible';
+							alert.innerHTML = data['reason'];
+						}
+						
+						$("#remove-regShop").submit(function(e) {
+							
+							console.log("deleting regShop request...");
+							e.preventDefault();
+							
+							item = {};
+							item['shopID'] = shopID;
+							deleteAPI("api/shops/"+shopID, {'shopOwnerID': getUserID}, success, failed);
+						});
+						
+					</script>
+				
+		            <form id="add-regShop-request">
+			            <div class="col-12">
+			            	<label>Why you want to use Nilla.lk</label>
+				            <input class="textData " type="text" id="regDesc" placeholder="" required>
+			            </div>
+						<div style="text-align: right;">
+							<input class="btn btn-s" type="submit"> 
+						</div>
+					</form>
+					<script>
+						function Success(data){
+							console.log(data)
+						}
+	
+						function Failed(data){
+							var alert = document.getElementById('divalert');
+							alert.style.visibility = 'visible';
+							alert.innerHTML = data['reason'];
+						}
+						
+						$("#add-regShop-request").submit(function(e) {
+							
+							console.log("creating regShop request...");
+							e.preventDefault();
+		
+							// TODO check before submiting
+							var regDesc = $('#regDesc').val();
+							
+							item = {};
+							item['shopID'] = shopID;
+							item['requestType'] = "ShopReg";
+							item['requestState'] = "InReview";
+							item['regDesc'] = regDesc;
+			        		jsonString = JSON.stringify(item);
+							console.log(jsonString);
+							postAPI("api/requests", {}, jsonString, Success, Failed);
+						});
+						
+					</script>
+				</div>
+
+                <!--Image Upload -->
+                <div class="popup-1" id="uploadImage">
+                    <div class="col-12" style="text-align: right">
+                        <input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closeUploadImg()">
+                    </div>
+                    <div class="col-12 center" style="text-align: center;">
+                        <h2>Upload Your Article Image Here.....</h2>
+                        <form id="addImage">
+							<input type="file" value="Upload Image" id="imageUpload" name="imageUpload" required>
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-s" style="margin-bottom: 10px;" value="Change">
+                            </div>
+                        </form>
+
+                        <script>
+                            function uploadingImgSuccess(data) {
+                            	console.log(data);
+//                                window.open("admin_blog.html", "_self");
+                            }
+                                
+                            function uploadingImgFailed(data) {
+                                /* TODO: Show error*/
+                                var alert = document.getElementById('divalert');
+                                alert.style.visibility = 'visible';
+                                alert.innerHTML = data['reason'];
+                            }
+                            
+                            $("#addImage").submit(function(e) {  
+                            	console.log("uploading Image...");
+                            	e.preventDefault();
+
+                            	let image = $('imageUpload').val();   
+                            	                         
+                            	postAPI("upload", {scope: 'Public', type: ""}, image, uploadingImgSuccess, uploadingImgFailed);                                
+                            });	
+                        </script>
+                    </div>
+                </div>
+
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+        <script type="text/javascript" src="../js/logout.js"></script>
+        <script type="text/javascript" src="../js/action.js"></script>		   	    
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_shop.js"></script>
+    </body>
+</html>

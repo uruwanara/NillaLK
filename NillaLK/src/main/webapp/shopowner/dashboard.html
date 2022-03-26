@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link rel="stylesheet" type="text/css" href="../css/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/img.css">
+	    <link rel="stylesheet" type="text/css" href="../css/button.css">
+	    <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+	    <link rel="stylesheet" type="text/css" href="../css/font.css">
+	    <link rel="stylesheet" type="text/css" href="../css/header.css">
+	    <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+	    <link rel="stylesheet" type="text/css" href="../css/content.css">	
+	    <title>Shop Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('ShopOwner');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+			    
+	</head>
+
+	<body>
+		<!-- Header of Page -->
+		<div class="header" id="header">
+	       	<div class="row">
+	           	<div class="content-line">
+	               	<img src="../img/logo_green.png" class="logo-header">
+	               	<h3 class="header-title">Shop Owner Dashboard</h3>
+	           	</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-ShopOwnerName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+	        </div>
+		</div>
+
+		<div id="content">
+		    <!-- Start of Window content without header and footer -->
+		    <div class="center">
+				<div class="col-12"><div class="header-height"></div></div>
+				<div class="col-12">
+				    <div class="col-2">
+				    	<img src="../img/icon/shopAddNewShop.png" height="140px" style="padding-right: 10px; cursor: pointer;" onclick="openAddNewShop()">	
+				    </div>
+				    <div class="col-10">
+						<h2>Select a Shop</h2>
+					    <div class="col-12">
+							<div id="content-load">
+						    	<!-- dynamic content load here -->
+						    	<script type="text/javascript">
+						    	
+						        	function success(data) {
+						        		//console.log(data);
+						        		$('#content-load').loadTemplate("../templates/shop-view-block.html", data, {append: true});
+						        	}
+						        	
+						        	function failed(data) {
+						        		$('#content-load').loadTemplate("../templates/no-result.html", data, {append: true});
+						        		console.log("failed");
+						        		console.log(data);
+						        	}
+						        	
+						        	getAPI("api/shops", {'shopOwnerID': getUserID}, success, failed);
+						        	
+						        </script>
+					        </div>
+					    </div>
+					</div>		
+				</div>
+
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div>
+
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+        <script type="text/javascript" src="../js/logout.js"></script>
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_shop.js"></script>
+    </body>
+</html>

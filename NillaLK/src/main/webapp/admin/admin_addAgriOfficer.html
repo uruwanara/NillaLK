@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/request.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">        
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <title>Add Agricultural Officer</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('Admin');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+						
+    </head>
+    <body>
+        <!-- Header of Page -->
+        <div class="header" id="header">
+            <div class="row">
+                <div class="content-line">
+                    <img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">        
+                    <img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Add Agricultural Officer</h3>
+                </div>
+  			<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-AdminName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+            </div>
+        </div>
+
+        <!-- Side Menu of Page -->
+        <div id="userSidebar" class="sidebar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin_userView.html">Users</a>
+            <a href="request.html">User Requests</a>
+            <a href="admin_plant.html">Plants</a>
+            <a href="admin_pests.html">Pests</a>
+            <a href="admin_blog.html">Blog</a>
+            <a href="admin_addAgriOfficer.html">Add Agricultural Officers</a>
+            <a href="assignZonal.html">Assign Zonal Department Head</a>
+            <a href="admin_advertise.html">Advertisement</a>
+        </div>
+        
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>
+				<div class="col-6">
+					<!--Dynamic Content 1-->
+					<div id="content-load">
+						<!-- dynamic content load here -->
+						<script type="text/javascript">
+							function success(data) {
+								for (i = 0; i < data.length; i++) {
+									var name = data[i].firstName+" "+data[i].lastName;
+									var userType;
+									if(data[i].userType == 'AgriInstructor'){
+										userType = "Agricultural Instructor";
+										item = {};
+										item['profilePicture'] = data[i].profilePicture;
+										item['name'] = name;
+										item['userType'] = userType;
+										item['registered'] = data[i].registered;
+										item['userID'] = data[i].userID;
+										$('#content-load').loadTemplate("../templates/agriList-view-block.html", item, {append: true});
+									} else if(data[i].userType == 'ZonalAgriHead'){
+										userType = "Zonal Agricultural Head";
+										item = {};
+										item['profilePicture'] = data[i].profilePicture;
+										item['name'] = name;
+										item['userType'] = userType;
+										item['registered'] = data[i].registered;
+										item['userID'] = data[i].userID;
+										$('#content-load').loadTemplate("../templates/agriList-view-block.html", item, {append: true});
+									}
+								}
+							}
+							function failed(data) {
+								console.log("failed");
+								console.log(data);
+							}
+							getAPI("api/users", {'0': 0}, success, failed);
+						</script>
+					</div>					
+                </div>
+				<div class="col-6">
+					<form id="createAgriOfficer">
+						<div class="col-12 col-s-12">
+							<label for="email"><b>E mail</b></label>
+							<input class="textData textData-s" type="text" id="email">
+						</div>	
+						<div class="col-12 col-s-12">
+							<label for="fName"><b>First Name</b></label>
+							<input  class="textData textData-s" type="text" id="fName">
+						</div>
+						<div class="col-12 col-s-12">
+							<label for="lName"><b>Last Name</b></label>
+							<input  class="textData textData-s" type="text" id="lName">
+						</div>
+						<div class="col-12 col-s-12">
+							<label for="ContactNo"><b>Contact Number</b></label>
+							<input  class="textData textData-s" type="text" id="ContactNo">
+						</div>
+						<div class="col-12 col-s-12">
+							<label for="NIC"><b>NIC</b></label>
+							<input  class="textData textData-s" type="text" id="NIC">
+						</div>
+						<div class="col-12 col-s-12">
+							<label for="password"><b>Password</b></label>
+							<input  class="textData textData-s" type="password" id="password">
+						</div>
+						<div class="col-12 col-s-12">
+							<input type="radio" name="post" value="choice1">
+							<label for="post">Agriculture Officer</label>
+						</div>
+						<div class="col-12 col-s-12">
+							<input type="radio" name="post" value="choice2">
+							<label for="post">Zonal Department Head</label>	
+						</div>
+						<div class="col-12" style="text-align: right;">
+				            <button class="btn btn-s" style="background-color: red;" onclick="">Remove</button>
+				            <button class="btn btn-s" onclick="">Save</button>  
+				            <button class="btn btn-s" onclick="">Add</button>
+	                        <button class="btn btn-s" onclick="closeD()">Cancel</button>  
+				        </div>
+			        </form>
+				</div>
+				<div class="col-12"><div class="footer-height"></div></div>
+			</div>
+		</div> 
+	
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>		      
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_admin.js"></script>
+    </body>
+</html>

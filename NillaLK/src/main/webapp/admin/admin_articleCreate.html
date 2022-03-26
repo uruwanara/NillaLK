@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+		<link rel="stylesheet" type="text/css" href="../css/file-upload.css">
+        <title>Admin Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- markup library -->
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('Admin');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+    </head>
+    <body>
+        <!-- Header of Page -->
+        <div class="header" id="header">
+            <div class="row">
+                <div class="content-line">
+                    <img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">        
+                    <img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Blog</h3>
+                </div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-AdminName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+            </div>
+        </div>
+
+        <!-- Side Menu of Page -->
+        <div id="userSidebar" class="sidebar">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin_userView.html">Users</a>
+            <a href="request.html">User Requests</a>
+            <a href="admin_plant.html">Plants</a>
+            <a href="admin_pests.html">Pests</a>
+            <a href="admin_blog.html">Blog</a>
+            <a href="admin_addAgriOfficer.html">Add Agricultural Officers</a>
+            <a href="assignZonal.html">Assign Zonal Department Head</a>
+            <a href="admin_advertise.html">Advertisement</a>
+        </div>
+		
+		<!-- Start of Window content without header and footer -->
+        <!-- Content -->
+        <div id="content">
+            <div class="center">
+                <div class="col-12"><div class="header-height"></div></div>
+                <div>
+                    <form id="createArticle">
+                        <div class="col-12">
+                            <div class="col-10">
+                                <input class="col-12 textData" name="articleTitle" id="articleTitle" style="font-size: large; font-weight: bold;" type="text" placeholder="Title of Article" required>
+                            </div>
+                            <div class="col-2">
+								<button id="button-upload" class="button-rounded chat-upload flex col-12" style="font-size: medium; font-weight: bold;">Upload Article Image</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="col-8">
+                                <div class="col-6">
+                                    <h3 style="font-style: italic; margin-bottom: 15px;"><font face = "Comic sans MS">Article Preview will display here...</font></h3>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-s" onclick="openRules()">Mark-up Rules Preview</button>
+                                </div>
+                                <!-- The rendered preview of Article-->
+                                <div id="render-content" class="html" style="font-size: medium; font-family: serif;"></div>
+                            </div>
+                            <div class="col-3">
+                                <!-- Article Description -->
+                                <textarea name="articleDesc" id="markup-content" cols="50" rows="30" placeholder="Enter Article Description......." required></textarea>						
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <input class="btn btn-s" type="submit">
+                            <button class="btn btn-s" onclick="closeCreateArticle()">Cancel</button>    
+                        </div>
+                    </form>
+                    
+                    <script>
+                        function creatingArticleSuccess(data) {
+                            window.open("admin_blog.html", "_self");
+                        }
+                            
+                        function creatingArticleFailed(data) {
+                            /* TODO: Show error*/
+                            var alert = document.getElementById('divalert');
+                            alert.style.visibility = 'visible';
+                            alert.innerHTML = data['reason'];
+                        }
+                        
+                        $("#createArticle").submit(function(e) {
+                                
+                            console.log("creating article...");
+                            e.preventDefault();
+            
+                            // TODO check before submiting
+                            var articleTitle = $('#articleTitle').val();
+                            var articleDesc = $('#markup-content').val();
+                            var articleImg = localStorage.getItem("Image");
+                            
+                            item = {};
+                            item['articleTitle'] = articleTitle;
+                            item['articleDesc'] = articleDesc;
+                            item['articleState'] = "Published";
+                            item['articleImg'] = articleImg;
+                            jsonString = JSON.stringify(item);
+                            
+                            postAPI("api/articles", {}, jsonString, creatingArticleSuccess, creatingArticleFailed);
+                            
+                        });
+        
+                    </script>
+                </div>
+                
+                <!--Image Upload -->
+				<script type="text/javascript">
+					$('#button-upload').click(function() {
+						$('#f-upload-window').show();
+					});
+	
+					$('body').loadTemplate('../templates/file-upload.html', {type: 'Other', scope: 'Public'}, {append: true, success: function() {
+						$("#upload-form").submit(function(e) {
+						    e.preventDefault();
+							
+							console.log('uploading...')
+							
+							uploadAPI(new FormData(e.target), function(data) {
+								//on success
+								console.log(data.path);
+								localStorage.setItem("Image", data.path);
+								closeUploadWindow();
+							}, function(error) {
+								console.error(error);
+								//on failure
+							});
+						});
+					}});				
+				</script>
+                <div class="col-12"><div class="footer-height"></div></div>
+            </div>
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script>		        
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/article.js"></script>
+        <script type="text/javascript" src="../js/dashboard_admin.js"></script>
+    </body>
+</html>

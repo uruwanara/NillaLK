@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/common.css">
+        <link rel="stylesheet" type="text/css" href="../css/button.css">
+        <link rel="stylesheet" type="text/css" href="../css/font.css">
+        <link rel="stylesheet" type="text/css" href="../css/img.css">
+        <link rel="stylesheet" type="text/css" href="../css/header.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+        <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+        <link rel="stylesheet" type="text/css" href="../css/userDashboard.css">
+        <title>Gardener Dashboard</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+		<script>
+			//if only specific user is allowed
+			//amIAllowedHere('Gardener');
+
+	    	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+	    </script>
+	
+    </head>
+    <body>
+		<!-- Header of Home Page -->
+		<div class="header" id="header">
+			<div class="row">
+				<div class="content-line">
+				  	<img src="../img/logo_green.png" class="logo-header">
+				  	<h3 class="header-title">Gardener Dashboard</h3>       
+				</div>
+				<div class="content-header content-line">
+					<!-- Dynamic Content header -->
+					<div id="content-header-name">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        	function successheader(data) {
+				        		var name = data.firstName+" "+data.lastName;
+				        		item = {};
+				        		item['name'] = name;
+				        		item['profilePicture'] = data.profilePicture;
+				        		//console.log(data);
+				        		$('#content-header-name').loadTemplate("../templates/header-UserName.html", item, {append: true});
+				        	}
+				        	function failedheader(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}	
+				        	var userID = getUserID();
+				        	getAPI("api/users/"+userID, {0:"0"}, successheader, failedheader);
+				        </script> 
+			      	</div>  
+				</div>
+			</div>
+		</div>
+
+		<!-- Content -->
+		<div class="center">
+			<div class="col-12"><div class="header-height"></div></div>
+	        <div class="col-3 col-m-6 col-s-12">
+	            <div class="">
+	                <button class="btn-list btn-1" onclick="openEnterArea()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Add a Plant to Garden</h3>
+	                    </div>
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserPlant()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Find a Plant</h3>
+	                    </div>
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserDisease()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Find a Disease</h3>
+	                    </div>
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserPest()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Find a Pest</h3>
+	                    </div>                
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserShop()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Search a Shop</h3>
+	                    </div>    
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserProduct()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Search a Product</h3>
+	                    </div>    
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserChat()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Contact Agriculture Instructor</h3>
+	                    </div>
+	                </button>
+	                <button class="btn-list btn-1" onclick="openUserBlog()">
+	                    <div class="col-3">
+	                        <img src="../img/plant.png" class="img-button-top">
+	                    </div>
+	                    <div class="col-9 name-middle">
+	                        <h3>Blog</h3>
+	                    </div>
+	                </button>
+	            </div>
+	        </div>
+	        <div class="col-6 col-m-6 col-s-12">
+				<div class="col-12">
+	                <h2 class="border">Advertisements</h2>
+					<!-- Dynamic Content 1 -->
+					<div id="content-load">
+				        <!-- dynamic content load here -->
+				        <script type="text/javascript">
+				        
+				        	function success(data) {
+				        		//console.log(data);
+				        		$('#content-load').loadTemplate("../templates/add-view-block.html", data, {append: true});
+				        	}
+				        	
+				        	function failed(data) {
+				        		console.log("failed");
+				        		console.log(data);
+				        	}
+				        	
+				        	getAPI("api/advertisements/9", {'0': 0}, success, failed);
+				        	
+				        </script>
+				        
+			      	</div>
+	            </div>
+	        </div>
+	        <div class="col-3 col-m-12 col-s-12">
+<!-- 	        	<div class="col-m-6 col-s-6" style="visibility: hidden;"></div> -->
+	        	<div class="device-wrapper" id="device-1">
+	        		<div class="device-data-wrapper">
+	        			<div style="display: flex; flex-direction: row; justify-content: center;">
+	        				<div class="reading">
+		        				<h3>Moisture</h3>
+		        				<h1 id="reading-moisture">0</h1>
+		        			</div>
+		        			<div class="reading">
+		        				<h3>Humidity</h3>
+		        				<h1 id="reading-humidity">0</h1>
+		        			</div>
+	        			</div>
+	        			<div>
+	        				<h3>Status</h3>
+		        			<h1 id="reading-status" style="font-size: large; font-weight: normal;">Waiting</h1>
+		        			<input id="state-toggle" class="toggle" type="checkbox" disabled="disabled"/>
+	        			</div>
+	        			<a id="setup-btn" href="#">setup</a>
+	        		</div>
+	        		<div class="device-setup-wrapper">
+	        			<div>
+	        				<h1 style="margin-bottom: 1rem;">Setup IoT</h1>
+	        				<h3>Local IP</h3>
+	        				<input type="text" minlength="7" maxlength="15" size="15" id="local-ip" placeholder="192.168.1.1" 
+	        				pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+	        				style="text-align: center;">
+	        				<a id="close-btn" href="#">setup</a>
+	        			</div>
+	        		</div>
+	        	</div>
+	    	</div>
+			<div class="col-12"><div class="footer-height"></div></div>
+		</div>
+
+		<!-- Add a Plant to Garden Pop up -->
+		<!--div class="popup-2" id="UserAddPlantPopup">
+            <div class="col-12" style="text-align: right">
+                <input type="image" src="../img/plant.png" class="close-icon close-icon-s" onclick="closeUserAddPlant()">
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <h1>Add Plant to your Garden</h1>
+            </div>
+            <div class="col-12" style="text-align: center;">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <input type="image" src="../img/Reg_Gardener.png" class="imgIcon" onclick="openEnterArea()">
+                </div>
+                <div class="col-5">
+                    <input type="image" src="../img/Reg_ShopOwner.png" class="imgIcon" onclick="openMonitorPlant()">
+                </div>
+            </div>
+        </div-->
+
+		<!-- Enter Area of Garden Pop up -->
+        <div class="popup-2" id="EnterAreaPopup">
+            <div class="col-12" style="text-align: right">
+                <input type="image" src="../img/close.png" class="close-icon close-icon-s" onclick="closeEnterArea()">
+            </div>
+            <div class="center">
+	            <form>
+		            <div class="col-12" style="text-align: left;">
+		                <h2>Area Analyze</h2>
+		            </div>
+		            <div class="col-12" style="text-align: left;">
+		                <h3>Area(sqr.ft)</h3>
+		                <input class="textData textData-s" type="text" name="area" id="area" placeholder="Enter the total gardening Area in Square Feets">
+		            </div>
+		            <div class="col-12" style="text-align: right; margin-bottom: 20px">
+		                <button class="btn btn-s" type="submit" onclick="openBrowsePlant()">Calculate</button>    
+		            </div>	            
+	            </form>
+	    	</div>
+        </div>
+        
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+
+        <script type="text/javascript" src="../js/logout.js"></script> 
+        <script type="text/javascript" src="../js/header.js"></script>
+		<script type="text/javascript" src="../js/dashboard_User.js"></script>
+    </body>
+</html>

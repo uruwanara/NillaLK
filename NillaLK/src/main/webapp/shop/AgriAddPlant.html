@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link rel="stylesheet" type="text/css" href="../css/common.css">
+	    <link rel="stylesheet" type="text/css" href="../css/img.css">
+	    <link rel="stylesheet" type="text/css" href="../css/button.css">
+	    <link rel="stylesheet" type="text/css" href="../css/textArea.css">
+	    <link rel="stylesheet" type="text/css" href="../css/font.css">
+	    <link rel="stylesheet" type="text/css" href="../css/header.css">
+	    <link rel="stylesheet" type="text/css" href="../css/sidebar.css">
+	    <link rel="stylesheet" type="text/css" href="../css/dropdown.css">
+	    <link rel="stylesheet" type="text/css" href="../css/footer.css">
+	    <link rel="stylesheet" type="text/css" href="../css/content.css">	
+	    <title>Add New Shop</title>
+        
+        <!-- ajax -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- custom libraries -->
+		<script type="text/javascript" src="../js/dynamic-methods.js"></script>
+		<script type="text/javascript" src="../js/jquery.loadTemplate.js"></script>
+		
+        <script>
+        	//if only specific user is allowed
+			//amIAllowedHere('ShopOwner');
+			
+        	//must have in every page
+			$(window).on('load', function(){
+	    		document.body.style.display = "block";
+	    	});
+		</script>
+			    
+	</head>
+
+	<body>
+	    <!-- Header of Page -->
+			<div class="header" id="header">
+	        	<div class="row">
+	            	<div class="content-line">
+	                	<img src="../img/menu.png" class="img-header usersidebtn" onclick="showSideBar()">
+	                	<img src="../img/logo_green.png" class="logo-header">
+	                	<h3 class="header-title">Shop Dashboard</h3>
+	            	</div>
+					<div class="content-header content-line">
+						<h4 class="header-user-name"> Shop Owner </h4>   
+	                    <!-- Drop down menu of header -->
+	                    <div class="dropdown">
+	                        <img src="../img/icon/user.png" class="img-header userdropbtn" onclick="showDropDown()">
+	                        <div id="userDropdown" class="user-dropdown-content">
+	                            <a href="updateShopDetails.html">Manage Your Account</a><br>
+	                        <a href='javascript:' onclick="logout()">Logout</a>  
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        
+		    <!-- Side Menu of Page -->
+		    <div id="userSidebar" class="sidebar">
+			<a href="dashboard.html">Dashboard</a>          
+		        <a href="shop_updateProduct.html">Update Products</a>
+		        <a href="shop_addNewProduct.html">Add New Products</a>
+		        <a href="shop_reqNewItem.html">New Item Requests</a>
+		        <a href="shop_reqPrioritize.html">Priorities Requests</a>
+		    </div>
+
+    <!-- Start of Window content without header and footer -->
+    <div id="content">
+
+        <div class="center">
+            <div class="col-12 col-s-12 header-height" style="padding-bottom: 150px;">
+
+			<form id="add-new">
+                <div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Plant Name</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Plant Family</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Plant Type</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+				<p style="font-weight: bolder;"> Data about the plant</p>
+				<div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">pH</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Germination Days</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Distance between Plants</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+				</div>
+				<div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Distance between Plant Rows</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Depth of Pit</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Watering Days</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+				</div>
+				<div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Harvest Days</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Seed bed Days</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px; text-align: right; ">Sunlight Condition</p>
+                    </div>
+                    <div class="col-2 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Climate Conditions</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+		
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Soil Condition</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Harvesting Advices</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Watering Avices</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+
+				<div class="row">
+					<div class="col-2 col-s-3">
+                        <p style="padding-top: 0px;">Ground Making Desription</p>
+                    </div>
+                    <div class="col-4 col-s-6">
+                        <input class="textData " type="text" id="shopName" placeholder="">
+                    </div>
+				</div>
+  
+					<p> Upload Images of the Shop</p>
+					<div class="row">
+						<button class="btn-add">+</button>
+						<label> Select an Image 1</label>
+					</div>
+
+					<div style="text-align: right;">
+						<input class="btn btn-s" type="submit"> 
+					</div>
+				</form>
+			</div>
+        </div>
+
+				<script>
+
+					function creatingShopSuccess(data) {
+						window.open("dashboard.html", "_self");
+//		        		var alert = document.getElementById('divalert');
+//						alert.style.visibility = 'hidden';
+//						location.href = '/login.html';
+		        	}
+		        	
+					function creatingShopFailed(data) {
+						/* TODO: Show error*/
+						var alert = document.getElementById('divalert');
+						alert.style.visibility = 'visible';
+						alert.innerHTML = data['reason'];
+		        	}
+				
+					$("#add-new").submit(function(e) {
+						
+						console.log("creating shop...");
+						e.preventDefault();
+	
+						// TODO check before submiting
+						var shopName = $('#shopName').val();
+		        		var shopLocation = $('#shopLocation').val();
+						var shopImg = sanitize($('#shopImg').val());
+						var addLine1 = sanitize($('#addLine1').val());
+						var addLine2 = sanitize($('#addLine2').val());
+						var city = sanitize($('#city').val());
+						var district = sanitize($('#district').val());	
+						
+						addressItem = {};
+						addressItem['addLine1'] = addLine1;
+						addressItem['addLine2'] = addLine2;
+						addressItem['city'] = city;
+						addressItem['district'] = district;						
+						
+		        		item = {};
+		        		item['shopName'] = shopName;
+		        		item['shopLocation'] = shopLocation;
+		        		item['shopImg'] = shopImg;
+		        		item['address'] = addressItem;
+		        		jsonString = JSON.stringify(item);
+		        		
+		        		postAPINoAuth("api/shops", {}, jsonString, creatingShopSuccess, creatingShopFailed);
+						
+					});
+
+				</script>        
+
+    </div>
+		<!-- Footer of Other Pages -->
+	    <footer>
+		    <div class="footer" id="footer">
+		    	<p class="footer-bottom"> All Right Reserved @ Nilla.lk 2020-2021</p>
+		    </div>
+		</footer>
+		
+        <script type="text/javascript" src="../js/logout.js"></script>
+        <script type="text/javascript" src="../js/action.js"></script>		   	    
+        <script type="text/javascript" src="../js/header.js"></script>
+        <script type="text/javascript" src="../js/dashboard_shop.js"></script>
+    </body>
+</html>

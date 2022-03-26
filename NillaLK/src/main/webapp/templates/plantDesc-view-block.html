@@ -1,0 +1,112 @@
+<!-- Plant Description View Block -->
+<script>
+	$("#plantPest").click(function(){
+		var plantID = $(this).val();
+		openPlantPest(plantID);
+	});
+	$("#plantDisease").click(function(){
+		var plantID = $(this).val();
+		openPlantDisease(plantID);
+	});
+	$("#plantFertilizer").click(function(){
+		var plantID = $(this).val();
+		openPlantFertilizer(plantID);
+	});
+</script>
+
+
+<div class="row">
+	<div class="col-3 col-s-12">
+		<div class="col-12 col-s-6">
+			<h2 data-content="nameSin"></h2>
+			<h2 data-content="nameEng"></h2><br>
+			<div>
+				<h3>Family  Name:</h3>
+				<h3 data-content="familyEng"></h3>
+				<h3 data-content="familySin"></h3>	
+			</div><br>	
+		</div>
+		<div class="col-12 col-s-6">
+		    <img data-src="plantImg" class="block-img">
+		</div>
+	</div>
+	<div class="col-9 col-s-12">
+		<div class="col-6 col-s-12">
+			<div class="col-4 text-img">
+				<img src="../img/icon/ph.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="pH"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <img src="../img/icon/disPlant.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="disPlant"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <img src="../img/icon/disRow.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="disRow"></h3></div>
+			</div>
+	    </div>
+	    <div class="col-6 col-s-12">
+	        <div class="col-4 text-img">
+			    <img src="../img/icon/pitdept.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="pitDepth"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <img src="../img/icon/sunlight.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="sunlight"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <input type="image" src="../img/icon/disease.png" class="block-img" data-value="plantID" style="cursor: pointer;" id="plantDisease">
+			</div>
+		</div>
+		<div class="col-6 col-s-12">
+			<div class="col-4 text-img">
+			    <img src="../img/icon/container.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="container"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <img src="../img/icon/germDays.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="germDays"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <img src="../img/icon/seedbed.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="seedBed"></h3></div>
+			</div>
+		</div>
+		<div class="col-6 col-s-12">
+		    <div class="col-4 text-img">
+		        <img src="../img/icon/waterDays.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="waterDays"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <img src="../img/icon/harvestday.png" class="block-img">
+			    <div class="bottom-center"><h3 data-content="harvestDays"></h3></div>
+			</div>
+			<div class="col-4 text-img">
+			    <input type="image" src="../img/icon/pest.png" class="block-img" data-value="plantID" style="cursor: pointer;" id="plantPest">
+			</div>
+		</div>    
+	</div>
+</div>
+		        
+<div class="row ">
+	<div class="col-3 col-s-12">
+		<button class="btn-focus btn-s-focus" id="plantFertilizer" data-value="plantID">Fertilizer</button>
+	</div>
+	<div class="col-9 col-s-12">
+		<h3>Soil - පස</h3>
+		<p data-content="soilSin"></p>
+		<p data-content="soilEng"></p><br>
+		<h3>Climate - කාලගුණය</h3>
+		<p data-content="climateSin"></p>
+		<p data-content="climateEng"></p><br>
+		<h3>Ground Making Instruction - බිම් සැකසුම් ආකාරය</h3>
+		<p data-content="makeGrndSin"></p>
+		<p data-content="makeGrndEng"></p><br>
+		<h3>Watering Methods - ජලය යෙදිය යුතු ආකාරය</h3>
+		<p data-content="wateringDesSin"></p>
+		<p data-content="wateringDesEng"></p><br>
+		<h3>Harvesting Methods - පලදාව ලබා ගැනීම</h3>
+		<p data-content="harvestDesSin"></p>
+		<p data-content="harvestDesEng"></p><br>
+	</div>
+</div>
